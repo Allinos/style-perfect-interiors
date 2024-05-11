@@ -20,10 +20,6 @@
         <p class="totalf none">&#8377;<span><%= rAmount %></span>/-
         <span class="maka">Received</span></p>
         <p class="totalf none">&#8377;<span><%= fdata[0]?.totalamount - rAmount %></span>/-</p>
-        <p class="split">
-            <span class="uppercase hide block phead">Split ratio</span>
-            <%= fdata[0].split %>
-        </p>
         <!-- <p class="farch cuck">&#8377;<span>40,000</span>/-</p>
         <p class="fstru cuck">&#8377;<span>40,000</span>/-</p>
         <p class="fthrd cuck">&#8377;<span>20,000</span>/-</p> -->
@@ -40,10 +36,7 @@
     <div class="adata fdata">
         <div class="project_expand grid">
             <p class="none"></p>
-            <!-- tasks  -->
-            <% fdata?.forEach((task)=>{ %>
-                <%- include('../partials/task.fin.ejs', {task: task, ratio: task.split.split(':')}) %> 
-                <% }) %>   
+           
         </div>
     </div>
 </div>
