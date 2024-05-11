@@ -1,4 +1,4 @@
-let ReqURI = { addExps: BASE_URL + `/add-Exps`, updExps: BASE_URL + `/expsUpdate/`, getExpsBymonths: BASE_URL + '/getExps', NisProjectPaid: location.origin + '/apiv1/nIsProjectPaid', MisProjectPaid: location.origin + '/apiv1/mIsProjectPaid' }
+let ReqURI = { addExps: BASE_URL + `/add-Exps`, updExps: BASE_URL + `/expsUpdate/`, getExpsBymonths: BASE_URL + '/getExps', NisProjectPaid: location.origin + '/apiv1/nIsProjectPaid',}
 
 function Opn_ExpenseCtn(e, elm) {
     (document.getElementsByClassName('main')[0]).classList.add('flow');
@@ -106,6 +106,7 @@ function ChangeExpsByMonths(e) {
             } else { AlertNotifier(res.status, res.msg, 'error'); }
         }).catch(err => { console.log('Error(fn-ExpsUpdate):', err); })
 }
+
 function search() {
     var inpValue = document.getElementById('searchQuery').value.toLowerCase();
     var elmCtn = document.querySelectorAll('.expense-list');
@@ -124,18 +125,16 @@ function search() {
             for (let i = 0; i < res.length; i++) {
                 if(res[i].total_price>res[i].amount_got){
                     Ctn=`<p class="red"><span>
-                        The project <strong>${res[i].deal_name}</strong> with Ref.no:<strong>${res[i].reference_no}</strong> has been completed while the payment of Rs ${res[i].total_price-res[i].amount_got}/- is pending </span><span><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="exclamation"><path fill="##000000" d="M12,14a1,1,0,0,0,1-1V7a1,1,0,0,0-2,0v6A1,1,0,0,0,12,14Zm0,4a1.25,1.25,0,1,0-1.25-1.25A1.25,1.25,0,0,0,12,18Z"></path></svg></span></p><hr>`
-                    IsPainCtn.innerHTML+=Ctn
+                        The project <strong>${res[i].deal_name}</strong> with Ref.no:<strong>${res[i].reference_no}</strong> has been completed while the payment of Rs ${res[i].total_price-res[i].amount_got}/- is pending </span><span><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="exclamation"><path fill="##000000" d="M12,14a1,1,0,0,0,1-1V7a1,1,0,0,0-2,0v6A1,1,0,0,0,12,14Zm0,4a1.25,1.25,0,1,0-1.25-1.25A1.25,1.25,0,0,0,12,18Z"></path></svg></span></p><hr>`;
+                    IsPainCtn.innerHTML+=Ctn;
                 }
             }
         }).catch(err => { console.log('error getting IsProjectPaid() data expanse.js |ln:110 '+err) })
-    ReqHandler.GET(ReqURI.MisProjectPaid)
-    .then((res) => {
-        for (let i = 0; i <res.length; i++) {
-            if(res[i].total_price>res[i].amount_got){
-            Ctn=`<p class="red"><span>
-                The project <strong>${res[i].sdeal_name}</strong> with Ref.no:<strong>${res[i].reference_no}</strong> has been completed while the payment of Rs ${res[i].total_price-res[i].amount_got}/- is pending </span><span><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="exclamation"><path fill="##000000" d="M12,14a1,1,0,0,0,1-1V7a1,1,0,0,0-2,0v6A1,1,0,0,0,12,14Zm0,4a1.25,1.25,0,1,0-1.25-1.25A1.25,1.25,0,0,0,12,18Z"></path></svg></span></p><hr>`
-            IsPainCtn.innerHTML+=Ctn}
-        }
-    }).catch(err => { console.log('error getting IsProjectPaid() data expanse.js |ln:110 '+err) })
+})();
+(()=>{
+    let month =(new Date().getMonth())+1;
+   let parentElm = document.getElementById('ExpsMonth').children;
+   for (const e of parentElm) {
+    if(e.value==month){e.removeAttribute('selected');e.setAttribute('selected','true')}
+   }
 })()

@@ -38,24 +38,11 @@ function removeOpen(index1) {
 }
 
 
-function useraction() {
-    userform.classList.add(`hide`);
-}
+function useraction() { userform.classList.add(`hide`);}
+function empAdd() {const userform = document.querySelector(`.userform`); userform.classList.toggle(`hide`);}
 
-function empAdd() {
-    const userform = document.querySelector(`.userform`);
-    userform.classList.toggle(`hide`);
-}
-
-
-function paginationFun(target) {
-    window.location.search = `?from=${(Number(target.innerHTML)) - 1}&to=${Number(target.innerHTML)}`;
-}
-
-function pageFunWithCursorNext() {
-    const URLparam = new URLSearchParams(window.location.search)
-    const toData = URLparam.get('to')
-    window.location.search = `?from=${Number(toData)}&to=${Number(toData) + 1}`;
+function paginationFun(target) {window.location.search = `?from=${(Number(target.innerHTML)) - 1}&to=${Number(target.innerHTML)}`;}
+function pageFunWithCursorNext() {const URLparam = new URLSearchParams(window.location.search);const toData = URLparam.get('to');window.location.search = `?from=${Number(toData)}&to=${Number(toData) + 1}`;
 }
 function pageFunWithCursor(type) {
     const lastpageNo = document.getElementById('last-box').innerHTML
@@ -70,7 +57,7 @@ function pageFunWithCursor(type) {
 }
 
 (function () {
-    if (location.href.match('/setting')== null) {
+    if (location.href.match('/setting') == null) {
         const URLparam = new URLSearchParams(window.location.search)
         const toData = URLparam.get('to')
         const pageNo = toData;
@@ -80,7 +67,7 @@ function pageFunWithCursor(type) {
                 document.getElementById('way-2').style.display = `none`
             }
             document.getElementById('2num').style.display = "none"
-            document.querySelectorAll('.pagin').forEach((el) => { el.style.display = `flex`})
+            document.querySelectorAll('.pagin').forEach((el) => { el.style.display = `flex` })
             if (toData == 3) { document.getElementById('way-1').style.display = `none` }
             if (Number(pageNo) + 1 < lastPageNo) {
                 document.getElementById('f-box').innerHTML = Number(pageNo) - 1
@@ -99,7 +86,10 @@ function pageFunWithCursor(type) {
     }
 })()
 
-function date_Split(val, p, t) { let [d, m, y] = val.split(p); return t ? `${y}/${m}/${d}` : `${y}-${m}-${d}` }
+function date_Split(val, p, t) {
+    let [d, m, y] = val.split(p);
+    return t ? `${y}/${m}/${d}` : `${y}-${m}-${d}`
+}
 // ReqHandler Data  
 // User Requestes To API
 let BASE_URL = location.href;
@@ -135,14 +125,10 @@ let ReqHandler = {
     }
 }
 
-
 function closeMainDropdown() {
     document.querySelector(`.main-dropdown`).classList.remove(`hide`);
 }
-// if (pageNo + 2 == lastPageNo) {
-//     document.getElementById('way-2').style.display = `none`
-// } else {
-//     document.getElementById('way-2').style.display = `flex`}
+
 async function CheckNotification() {
     let nCtn = document.querySelector('.notification-column')
     let nCount = document.querySelector('#notification-count')
@@ -156,7 +142,8 @@ async function CheckNotification() {
                 <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
                 </svg></span>|<span class="n-icon " onclick="UpdateNotify('removed',${e.notid})"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                 <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" /> </svg></span></span></p><hr>`
-                if (e.status !== 'read') { nCounts++ }            }
+                if (e.status !== 'read') { nCounts++ }
+            }
             if (nCounts > 0) { nCount.style.display = 'block'; nCount.innerHTML = nCounts }
             else { nCount.style.display = 'none' }
         }
