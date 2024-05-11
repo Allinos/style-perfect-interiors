@@ -156,11 +156,8 @@ function GetUserDetailsReq(e) {
         .then((res) => {
             if (res.status) {
                 WrokStatusCtn[0].querySelector('.primary').innerText = res.data[1].length
-                WrokStatusCtn[0].querySelector('.blue').innerText = res.data[0][0].total_cats
+                WrokStatusCtn[0].querySelector('.blue').innerText = res.data[0][0].num_cats_completed
                 WrokStatusCtn[0].querySelector('.red').innerText = res.data[0][0].total_cats - res.data[0][0].num_cats_completed
-                WrokStatusCtn[1].querySelector('.primary').innerText = res.data[3].length
-                WrokStatusCtn[1].querySelector('.blue').innerText = res.data[2][0].total_mtask
-                WrokStatusCtn[1].querySelector('.red').innerText = res.data[2][0].total_mtask - res.data[2][0].num_task_completed
             }
         }).catch(err => {
             console.log('Error(fn-getAtten):', err);
