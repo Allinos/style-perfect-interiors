@@ -34,12 +34,12 @@
                     </svg>
                     <div class="total_user_data">
                         <p class="size">&#8377;<span>
-                                <%= data[2][0].total_sum + data[2][1].total_sum %>
+                                <%= data[2][0].total_sum %>
                             </span>/-</p>
                         <p class="text">Total Amount</p>
                     </div>
                 </div>
-                <!-- ---------------AMOUNT IN BANK ------------ -->
+                <!-- ---------------AMOUNT IN Hand ------------ -->
                 <div class="amount_in-bank flex data">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="money-bill-stack" class="svg">
                         <path fill="##000000"
@@ -50,16 +50,16 @@
                         <p class="size">&#8377;<span>
                                 <% if (typeof data[1] !=='undefined' && Array.isArray(data[1]) && data[1].length> 1) {
                                     %>
-                                    <% var cash=(data[1][0].cash_sum || 0) + (data[1][1].cash_sum || 0) %>
+                                    <% var cash=(data[1][0].cash_sum || 0) %>
                                         <%= cash %>
                                             <% } else { %>
                                                 0
                                                 <% } %>
                             </span>/-</p>
-                        <p class="text">Cash in Hand</p>
+                        <p class="text">Amount in Cash</p>
                     </div>
                 </div>
-                <!-- ---------CASH IN HAND----------- -->
+                <!-- ---------AMOUNT IN Bank----------- -->
                 <div class="cash_in-hand flex data">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="money-bill-stack" class="svg">
                         <path fill="##000000"
@@ -70,7 +70,7 @@
                         <p class="size">&#8377;<span>
                                 <% if (typeof data[1] !=='undefined' && Array.isArray(data[1]) && data[1].length> 1) {
                                     %>
-                                    <%= (data[1][0].online_sum || 0) + (data[1][1].online_sum || 0) %>
+                                    <%= (data[1][0].online_sum || 0)%>
                                         <% } else { %>
                                             0
                                             <% } %>
