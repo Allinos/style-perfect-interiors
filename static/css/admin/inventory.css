@@ -1,15 +1,17 @@
-.inventory-container{
+.inventory-container {
     height: 65vh;
     /* background: crimson; */
     overflow-y: scroll;
-    
+
 }
-.inventory-container::-webkit-scrollbar{
+
+.inventory-container::-webkit-scrollbar {
     display: block;
     scrollbar-color: black;
     scrollbar-width: 10px;
 }
-.inventory-item{
+
+.inventory-item {
     background: var(--white);
     border-radius: var(--border-radius-2);
     padding: 0.8rem 1.3rem;
@@ -18,17 +20,21 @@
     margin-bottom: 0.5rem;
     flex-wrap: wrap;
 }
-.inventory-details .inName{
+
+.inventory-details .inName {
     font-size: 12px;
-    font-weight: 400;
+    line-height: 2;
+    font-weight: 600;
     color: var(--designation-color);
 }
-.inventory-details .inData{
+
+.inventory-details .inData {
     font-size: 14px;
     font-weight: 500;
     line-break: auto;
 }
-.inventory-details .arrow-side{
+
+.inventory-details .arrow-side {
     background: var(--bg-color);
     border-radius: 50%;
     padding: 2px;
@@ -36,15 +42,18 @@
     align-items: center;
     justify-content: center;
 }
-.inventory-details .arrow-side:hover{
+
+.inventory-details .arrow-side:hover {
     background: var(--primary-color);
     transition: var(--animation-1);
 }
-.inventory-details .arrow-side:hover svg{
+
+.inventory-details .arrow-side:hover svg {
     fill: var(--white);
 }
+
 /* --POPUPS-- */
-.one{
+.one {
     position: absolute;
     top: 0;
     left: 0;
@@ -53,7 +62,8 @@
     background: var(--black-light);
     z-index: 100;
 }
-.two{
+
+.two {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -65,16 +75,22 @@
     padding: 8px;
     border-radius: var(--border-radius-1);
 }
-.inventoryList,.inventoryList-popup{
+
+.inventoryList,
+.inventoryList-popup {
     display: none;
 }
-:is(.inventoryList, .inventoryList-popup).active{
+
+:is(.inventoryList, .inventoryList-popup).active {
     display: block;
 }
-.ref-list label{
+
+.ref-list label {
     width: 100%;
 }
-.ref-list select,.project-inv .field :is(input,select){
+
+.ref-list select,
+.project-inv .field :is(input, select) {
     width: 100%;
     height: 2.5rem;
     border-radius: var(--border-radius-1);
@@ -88,43 +104,54 @@
     font-weight: 500;
 }
 
-:is(.ref-list select, .project-inv .field :is(input,select)):hover{
+:is(.ref-list select, .project-inv .field :is(input, select)):hover {
     outline: 1px solid var(--black-light-2);
 }
-:is(.ref-list select, .project-inv .field :is(input,select)):focus{
+
+:is(.ref-list select, .project-inv .field :is(input, select)):focus {
     outline: 2px solid var(--primary-color);
 }
-.ref-list select option:first-child{
+
+.ref-list select option:first-child {
     font-weight: 600;
 }
-.project-inv,.inventory-add-item{
+
+.project-inv,
+.inventory-add-item {
     display: none;
 }
-:is(.project-inv).active{
+
+:is(.project-inv).active {
     display: block;
 }
-.inventory-add-item.active{
+
+.inventory-add-item.active {
     display: flex;
 }
-.project-inv .field{
+
+.project-inv .field {
     width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
-.project-inv .field label{
+
+.project-inv .field label {
     font-size: 12px;
-        color: var(--grey);
-        font-weight: 500;
+    color: var(--grey);
+    font-weight: 500;
 }
-.project-inv .pro-name{
+
+.project-inv .pro-name {
     font-weight: 600;
     font-size: 14px;
 }
-.inv-particular{
+
+.inv-particular {
     justify-content: stretch;
 }
-.inventory-add-item button{
+
+.inventory-add-item button {
     padding: 8px;
     border-radius: var(--border-radius-1);
     color: var(--secondary-color);
@@ -139,12 +166,14 @@
     margin-top: 1rem;
     flex-grow: 1;
 }
-.inventory-add-item button svg{
+
+.inventory-add-item button svg {
     width: 20px;
     height: 20px;
     fill: var(--secondary-color);
 }
-.inventory-btn button{
+
+.inventory-btn button {
     padding: 10px;
     border-radius: var(--border-radius-1);
     font-size: 16px;
@@ -153,25 +182,30 @@
     margin-top: 1rem;
     flex-grow: 1;
 }
-.inventory-btn button:first-child{
+
+.inventory-btn button:first-child {
     background: var(--primary-bgr);
     color: var(--primary-color);
 }
-.inventory-btn button:first-child:is(:hover, :focus){
+
+.inventory-btn button:first-child:is(:hover, :focus) {
     background: var(--primary-color);
     color: var(--white);
 }
-.inventory-btn button:last-child{
+
+.inventory-btn button:last-child {
     background: var(--ter-light-color);
     color: var(--ter-dark-color);
 }
-.inventory-btn button:last-child:is(:hover, :focus){
+
+.inventory-btn button:last-child:is(:hover, :focus) {
     background: var(--ter-dark-color);
     color: var(--white);
 }
+
 /* 2nd POPUP  */
 
-.particularDetails .pussy{
+.particularDetails .pussy {
     background: var(--ter-light-color);
     border-radius: 50%;
     display: flex;
@@ -181,25 +215,30 @@
     padding: 8px;
     float: right;
 }
-.pussy svg{
+
+.pussy svg {
     fill: var(--ter-dark-color);
 }
-.particularDetails .particularData{
+
+.particularDetails .particularData {
     align-items: stretch;
     justify-content: space-between;
     margin-top: 1rem;
     padding: 0 5px;
 }
-.project-refr .inName{
+
+.project-refr .inName {
     font-size: 12px;
     color: var(--designation-color);
     font-weight: 500;
 }
-.project-refr .inData{
+
+.project-refr .inData {
     font-weight: 600;
     /* text-wrap: wrap */
 }
-.itemsTable{
+
+.itemsTable {
     margin-top: 0.9rem;
     margin-bottom: 0.9rem;
     width: 100%;
@@ -208,56 +247,73 @@
     font-size: 0.9rem;
     border-radius: 8px 8px 0 0;
     overflow: hidden;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    ;
 }
-.itemsTable thead tr{
+
+.itemsTable thead tr {
     background: var(--primary-bgr);
     color: var(--primary-color);
     text-align: left;
     font-weight: 600;
 }
-.itemsTable tr td{
+
+.itemsTable tr td {
     font-weight: 500;
 }
-.itemsTable :is(th,td){
+
+.itemsTable :is(th, td) {
     padding: 12px 15px;
 }
-.itemsTable tbody tr{
+
+.itemsTable tbody tr {
     border-bottom: 1px solid var(--primary-outline);
 }
-.itemsTable tbody tr:nth-of-type(even){
+
+.itemsTable tbody tr:nth-of-type(even) {
     background: var(--primary-light-color);
     color: var(--primary-color);
 }
-.itemsTable tbody tr:last-of-type{
+
+.itemsTable tbody tr:last-of-type {
     border-bottom: 2px solid var(--primary-color);
 }
-.itemsTable tbody tr:last-of-type td{
+
+.itemsTable tbody tr:last-of-type td {
     font-weight: 800;
 }
-@media (max-width: 480px){
-    .inventory-item{
+
+@media (max-width: 480px) {
+    .inventory-item {
         gap: 8px;
     }
-    .inventory-details .inData{
+
+    .inventory-details .inData {
         /* font-size: 13px; */
     }
-    .inventoryList-details, .particularDetails{
+
+    .inventoryList-details,
+    .particularDetails {
         width: 100% !important;
     }
-    .project-refr .inName{
+
+    .project-refr .inName {
         font-size: 12px;
     }
-    .project-refr .inData{
+
+    .project-refr .inData {
         font-size: 14px;
     }
-    .itemsTable :is(th,td){
+
+    .itemsTable :is(th, td) {
         padding: 5px 8px;
     }
-    .itemsTable thead th{
+
+    .itemsTable thead th {
         font-size: 12px;
     }
-    .itemsTable tbody td{
+
+    .itemsTable tbody td {
         font-weight: 600;
     }
 }

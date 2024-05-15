@@ -14,6 +14,36 @@ async function empPopup(target) {
         </li>
     </ul>
     </form>
+    <div class="another-btn">
+    <button class="uppercase">
+    <span>Add project employee</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+        <path fill="##000000"
+            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+        </path>
+    </svg>
+    </button>
+    </div>
+    <div class="another-emp flex">
+    <div class="field">
+        <label for="" class="uppercase">Name</label>
+        <input type="text" name="" id="" placeholder="Name">
+    </div>
+    <div class="field">
+        <label for="" class="uppercase">designation</label>
+        <input type="text" name="" id="" placeholder="Engineer">
+    </div>
+    <div class="field another-btn">
+        <button class="uppercase">
+            <span>Add</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                <path fill="##000000"
+                    d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                </path>
+            </svg>
+        </button>
+    </div>
+</div>
     <div class="drop-btn flex">
     <button data-category_id="${getId.taskid}" data-ndeal_id="${getId.ndealid}" data-npcid="${getId.npcid ? getId.npcid : 'false'}" class="uppercase" onclick="addNewEmp(this, event)">update</button>
     <button type="button" class="uppercase " onclick="hideMainDropdown();" >Cancel</button></div>

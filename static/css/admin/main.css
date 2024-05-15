@@ -287,18 +287,22 @@
 .accordion-content .arrow-down.open svg {
     transform: rotate(180deg);
 }
-.accordion-content .ahead{
+
+.accordion-content .ahead {
     position: relative;
 }
-.edit-btn{
+
+.edit-btn {
     background: var(--sec-light-color);
     color: var(--secondary-color);
     padding: 5px 8px;
     border-radius: var(--border-radius-1);
 }
-.edit-box:hover{
+
+.edit-box:hover {
     background: var(--sec-bg);
 }
+
 /* HIDDEN CONTENT  */
 .adata {
     display: none;
@@ -518,6 +522,56 @@
     opacity: 0.8;
 }
 
+.emp-drop-menu .another-btn button {
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+    color: var(--primary-color) !important;
+    background: var(--primary-light-color) !important;
+    outline: 1px solid var(--primary-outline) !important;
+    font-weight: 600;
+    transition: var(--transition-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.another-btn button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--primary-color);
+}
+
+.another-emp {
+    justify-content: space-between;
+}
+
+.another-emp .field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.another-emp .field label{
+    font-size: 12px;
+        color: var(--grey);
+        font-weight: 500;
+}
+.another-emp .field input{
+    width: 100%;
+    height: 2.3rem;
+    border-radius: var(--border-radius-1);
+    background: var(--bg-2);
+    outline: 1px solid var(--black-light);
+    animation: var(--animation-1);
+    padding: 0 1rem;
+    margin-top: 5px;
+    font-size: 1rem;
+    word-wrap: break-word;
+    font-weight: 500;
+}
 .main-dropdown .drop-btn button:nth-child(1) {
     color: var(--primary-color);
     background: var(--bg-color);
@@ -594,9 +648,10 @@
     background: var(--white);
 }
 
-:is(.emp-drop-menu, .task-drop-menu) ul li input:checked ~ span {
+:is(.emp-drop-menu, .task-drop-menu) ul li input:checked~span {
     text-decoration: underline;
 }
+
 .main-dropdown .emp-drop-menu button:first-child {
     background: var(--sec-light-color);
     color: var(--secondary-color);
@@ -620,17 +675,21 @@
 .task-drop-menu ul {
     background: var(--green-bg);
 }
-.task-drop-menu ul li{
+
+.task-drop-menu ul li {
     background: var(--green-bgr);
     color: var(--green);
     outline: 1px solid var(--green-outline);
 }
-.task-drop-menu ul li:hover{
+
+.task-drop-menu ul li:hover {
     background: var(--white);
 }
+
 .task-drop-menu ul li input {
     accent-color: var(--green);
 }
+
 .main-dropdown .task-drop-menu button:first-child {
     background: var(--green-light);
     color: var(--green);
@@ -641,6 +700,7 @@
     background: var(--green);
     color: var(--white);
 }
+
 /* -------DEADLINE MENU DROPDOWN-------- */
 .main-dropdown .deadline-drop-menu {
     padding: 1rem;
@@ -671,55 +731,64 @@
 }
 
 /* -------EDIT PROJECT MENU DROPDOWN-------- */
-.main-dropdown .edit-menu{
+.main-dropdown .edit-menu {
     padding: 1rem;
     display: none;
 }
-.edit-menu.active{
+
+.edit-menu.active {
     display: block;
 }
-.edit-menu form h4{
+
+.edit-menu form h4 {
     text-align: center;
     color: var(--primary-color);
     text-decoration: underline;
     margin-top: 1rem;
     margin-bottom: 10px;
 }
-.edit-menu form .edit-grid{
+
+.edit-menu form .edit-grid {
     display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
 }
-.edit-menu form .field{
+
+.edit-menu form .field {
     width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
-.edit-menu form .field label{
-        font-size: 12px;
-        color: var(--grey);
-        font-weight: 500;
+
+.edit-menu form .field label {
+    font-size: 12px;
+    color: var(--grey);
+    font-weight: 500;
 }
-.edit-menu form .field input{
+
+.edit-menu form .field input {
     width: 100%;
-  height: 2.5rem;
-  border-radius: var(--border-radius-1);
-  background: var(--bg-2);
-  outline: 1px solid var(--black-light);
-  animation: var(--animation-1);
-  padding: 0 1rem;
-  margin-top: 5px;
-  font-size: 1rem;
-  word-wrap: break-word;
-  font-weight: 500;
+    height: 2.5rem;
+    border-radius: var(--border-radius-1);
+    background: var(--bg-2);
+    outline: 1px solid var(--black-light);
+    animation: var(--animation-1);
+    padding: 0 1rem;
+    margin-top: 5px;
+    font-size: 1rem;
+    word-wrap: break-word;
+    font-weight: 500;
 }
-.edit-menu form .field input:hover{
+
+.edit-menu form .field input:hover {
     outline: 1px solid var(--black-light-2);
 }
-.edit-menu form .field input:focus{
+
+.edit-menu form .field input:focus {
     outline: 2px solid var(--primary-color);
 }
+
 /* -----------------------------------
         SUB-TASKS on add
 ------------------------------- */
