@@ -15,16 +15,15 @@ async function empPopup(target) {
     </ul>
     </form>
     <div class="another-btn">
-    <button class="uppercase">
+    <button class="uppercase" onclick="Opn_addProjectEmp()">
     <span>Add project employee</span>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-        <path fill="##000000"
-            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+        <path fill="##000000" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
         </path>
     </svg>
     </button>
     </div>
-    <div class="another-emp flex">
+    <div class="another-emp">
     <div class="field">
         <label for="" class="uppercase">Name</label>
         <input type="text" name="" id="" placeholder="Name">
@@ -188,10 +187,11 @@ editProject = async (target, type) => {
 async function UpdateProjectDetails(target, type) {
     const formUpdate = new FormData(document.getElementById('update-detail-form'))
     formUpdate.append('dealid', target.dataset.dealid)
-    if (type=='normal') { await dataMethod.GET_POST('apiv1/np-data-update', 'PUT', formUpdate, 'form');
+    if (type == 'normal') {
+        await dataMethod.GET_POST('apiv1/np-data-update', 'PUT', formUpdate, 'form');
     } else { await dataMethod.GET_POST('apiv1/misc-data-update', 'PUT', formUpdate, 'form'); }
     hideMainDropdown()
-   
+
 }
 
 function hideMainDropdown(event) {

@@ -545,6 +545,7 @@
 }
 
 .another-emp {
+    display: none;
     justify-content: space-between;
 }
 

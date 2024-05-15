@@ -4,14 +4,13 @@ async function updataAdvancePay(data, e) {
     const target = data.dataset
     const advanceData = new FormData(document.getElementById('advanced-form'));
     advanceData.append('ndeal_id', Number(target.dealid));
-    advanceData.append('task', Number(target.taskid));
     await getFun.GET_POST('admin/finance/update-advancepay', 'PUT', advanceData, 'form')
     document.querySelector(`.main-dropdown`).style.display = `none`;;
 }
 
 async function openDick(data) {
     document.getElementsByClassName('main')[0].classList.add('flow')
-    const { ndealid, taskid } = data.dataset
+    const { dealid } = data.dealid
     const maindropDown = document.querySelector(`.main-dropdown`);
     maindropDown.style.display = `block`;
     maindropDown.innerHTML = ""
@@ -33,7 +32,7 @@ async function openDick(data) {
             <input type="text" name="dateofpay" id="" placeholder="dd/mm/yyyy">
         </div>
         <div class = "drop-btn flex">
-        <button type="button" class="uppercase" data-dealid=${ndealid} data-taskid=${taskid} onclick="updataAdvancePay(this, event)">update</button>
+        <button type="button" class="uppercase" data-dealid=${dealid} onclick="updataAdvancePay(this, event)">update</button>
         <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
         </div>
     </form>

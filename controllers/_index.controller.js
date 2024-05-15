@@ -87,7 +87,7 @@ exports.renderNormalProjectFinance = async (req, res) => {
                 // res.status(200).send(sentData);
                 const sortedData = sentData.sort((a, b) => b[0].id - a[0].id);
                 // console.log(sortedData)
-                res.render('../views/admin/np.finance.ejs', { sortedData });
+                res.render('../views/admin/project.finance.ejs', { sortedData });
             } else {
                 console.log(err);
                 res.status(500).send({ msg: "Internal server error!!!" })
@@ -99,7 +99,7 @@ exports.renderNormalProjectFinance = async (req, res) => {
 
 exports.renderNormalProjectForm = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        res.status(200).render('../views/admin/np.form.ejs')
+        res.status(200).render('../views/admin/project.form.ejs')
     }
 }
 
