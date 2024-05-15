@@ -30,9 +30,7 @@ exports.indexDeshboard = async (req, res) => {
 
 exports.userManager = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT em_id, name ,number, email,job_role, lastLoginAt ,lastLogoutAt , status FROM employee`
-        // INNER JOIN normal_project_employee ON employee.em_id = normal_project_employee.emid
-        // GROUP BY normal_project_employee.emid;
+        const query = `SELECT em_id, name ,number, email,job_role, lastLoginAt ,lastLogoutAt , status FROM employee`;
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/user.ejs', { data: result })
         })
@@ -54,7 +52,6 @@ exports.expense = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
         const query = `SELECT * FROM expenses WHERE date LIKE '%${months}/${year}%' ORDER BY id DESC ;
          SELECT 'normal_projects_finance' AS tName, SUM(amount_got) AS total_amount_got, SUM(CASE WHEN modeofpay='online' THEN amount_got ELSE 0 END) AS online_sum, SUM(CASE WHEN modeofpay='cash' THEN amount_got ELSE 0 END) AS cash_sum FROM normal_projects_finance GROUP BY tName;
-        
         SELECT  SUM(total_price) AS total_sum FROM deals;SELECT SUM(CASE WHEN md_type ='cash' THEN amount ELSE 0 END) AS cash_expenses, sum(case when md_type ='online' THEN amount ELSE 0 END) as online_expenses FROM expenses;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/expense.finance.ejs', { data: result })
@@ -63,7 +60,48 @@ exports.expense = (req, res) => {
         })
     }
 }
+//INVENTORY
+exports.inventory = (req, res) => {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const query = `select * from subtask;select * from mis_subtask;select * from amount_split`
+        db.query(query, (err, result, field) => {
+            res.status(200).render('../views/admin/inventory.ejs', { data: result })
+        })
+    }
+}
 
+//---Finance 
+exports.renderNormalProjectFinance = async (req, res) => {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const q = `SELECT deals.id, deals.reference_no, deals.city, deals.deal_name, normal_projects_finance.task, task.task_name, normal_projects_finance.totalamount, normal_projects_finance.amount_got, normal_projects_finance.modeofpay FROM normal_projects_finance INNER JOIN deals ON deals.id = normal_projects_finance.ndeal_id INNER JOIN task ON task.task_id = normal_projects_finance.task;`
+        await db.query(q, (err, result) => {
+            if (!err) {
+                const grouped = {};
+                const sentData = []
+                result.forEach(element => {
+                    const key = element.id.toString();
+                    if (!grouped[key]) { grouped[key] = [] }
+                    grouped[key].push(element);
+                })
+                for (const key in grouped) { sentData.push(grouped[key]) }
+                // res.status(200).send(sentData);
+                const sortedData = sentData.sort((a, b) => b[0].id - a[0].id);
+                // console.log(sortedData)
+                res.render('../views/admin/np.finance.ejs', { sortedData });
+            } else {
+                console.log(err);
+                res.status(500).send({ msg: "Internal server error!!!" })
+            }
+        })
+
+    }
+}
+
+exports.renderNormalProjectForm = async (req, res) => {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        res.status(200).render('../views/admin/np.form.ejs')
+    }
+}
 
 //---Normal project form works-------
 exports.insertNewNormalDeal = async (req, res) => {
@@ -137,37 +175,3 @@ exports.insertNewNormalDeal = async (req, res) => {
 
     }
 }
-//---normal projects controll-------
-exports.renderNormalProjectFinance = async (req, res) => {
-    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const q = `SELECT deals.id, deals.reference_no, deals.city, deals.deal_name, deals.split, normal_projects_finance.task, task.task_name, normal_projects_finance.totalamount, normal_projects_finance.amount_got, normal_projects_finance.modeofpay FROM normal_projects_finance INNER JOIN deals ON deals.id = normal_projects_finance.ndeal_id INNER JOIN task ON task.task_id = normal_projects_finance.task;`
-        await db.query(q, (err, result) => {
-            if (!err) {
-                const grouped = {};
-                const sentData = []
-                result.forEach(element => {
-                    const key = element.id.toString();
-                    if (!grouped[key]) { grouped[key] = [] }
-                    grouped[key].push(element);
-                })
-                for (const key in grouped) { sentData.push(grouped[key]) }
-                // res.status(200).send(sentData);
-                const sortedData = sentData.sort((a, b) => b[0].id - a[0].id);
-                // console.log(sortedData)
-                res.render('../views/admin/np.finance.ejs', { sortedData });
-            } else {
-                res.status(500).send({ msg: "Internal server error!!!" })
-            }
-        })
-
-    }
-}
-
-exports.renderNormalProjectForm = async (req, res) => {
-    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        res.status(200).render('../views/admin/np.form.ejs')
-    }
-}
-
-
-

@@ -4,6 +4,7 @@ let namue = document.querySelectorAll(`.namue`);
 let nav = document.querySelector(`nav`);
 let aside = document.querySelector(`aside`);
 let ham = document.querySelector(`#ham`);
+
 (()=>{
     let pageCtn=document.querySelector('.nav-lists')
    let pageDataList= pageCtn.getElementsByTagName('a')

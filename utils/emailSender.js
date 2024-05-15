@@ -36,6 +36,6 @@ const EmailSender = async (type,proj, e) => {
     }
 };
 
-// EmailSender('remove','normal', {  ndeal_id:'5' ,category_id:'1', emid:'1' });
 
 module.exports={EmailSender}
+// EmailSender('remove','normal', {  ndeal_id:'5' ,category_id:'1', emid:'1' });

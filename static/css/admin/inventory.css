@@ -1,0 +1,319 @@
+.inventory-container {
+    height: 65vh;
+    /* background: crimson; */
+    overflow-y: scroll;
+
+}
+
+.inventory-container::-webkit-scrollbar {
+    display: block;
+    scrollbar-color: black;
+    scrollbar-width: 10px;
+}
+
+.inventory-item {
+    background: var(--white);
+    border-radius: var(--border-radius-2);
+    padding: 0.8rem 1.3rem;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.inventory-details .inName {
+    font-size: 12px;
+    line-height: 2;
+    font-weight: 600;
+    color: var(--designation-color);
+}
+
+.inventory-details .inData {
+    font-size: 14px;
+    font-weight: 500;
+    line-break: auto;
+}
+
+.inventory-details .arrow-side {
+    background: var(--bg-color);
+    border-radius: 50%;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-details .arrow-side:hover {
+    background: var(--primary-color);
+    transition: var(--animation-1);
+}
+
+.inventory-details .arrow-side:hover svg {
+    fill: var(--white);
+}
+
+/* --POPUPS-- */
+.one {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--black-light);
+    z-index: 100;
+}
+
+.two {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 90%;
+    background: var(--white);
+    box-shadow: var(--box-shadow-1);
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+}
+
+.inventoryList,
+.inventoryList-popup {
+    display: none;
+}
+
+:is(.inventoryList, .inventoryList-popup).active {
+    display: block;
+}
+
+.ref-list label {
+    width: 100%;
+}
+
+.ref-list select,
+.project-inv .field :is(input, select) {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: var(--border-radius-1);
+    background: var(--bg-2);
+    outline: 1px solid var(--black-light);
+    animation: var(--animation-1);
+    padding: 0 1rem;
+    margin-top: 5px;
+    font-size: 1rem;
+    word-wrap: break-word;
+    font-weight: 500;
+}
+
+:is(.ref-list select, .project-inv .field :is(input, select)):hover {
+    outline: 1px solid var(--black-light-2);
+}
+
+:is(.ref-list select, .project-inv .field :is(input, select)):focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.ref-list select option:first-child {
+    font-weight: 600;
+}
+
+.project-inv,
+.inventory-add-item {
+    display: none;
+}
+
+:is(.project-inv).active {
+    display: block;
+}
+
+.inventory-add-item.active {
+    display: flex;
+}
+
+.project-inv .field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.project-inv .field label {
+    font-size: 12px;
+    color: var(--grey);
+    font-weight: 500;
+}
+
+.project-inv .pro-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.inv-particular {
+    justify-content: stretch;
+}
+
+.inventory-add-item button {
+    padding: 8px;
+    border-radius: var(--border-radius-1);
+    color: var(--secondary-color);
+    background: var(--sec-light-color);
+    outline: 1px solid var(--sec-outline);
+    font-weight: 600;
+    transition: var(--transition-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 1rem;
+    flex-grow: 1;
+}
+
+.inventory-add-item button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--secondary-color);
+}
+
+.inventory-btn button {
+    padding: 10px;
+    border-radius: var(--border-radius-1);
+    font-size: 16px;
+    font-weight: 700;
+    transition: var(--transition-2);
+    margin-top: 1rem;
+    flex-grow: 1;
+}
+
+.inventory-btn button:first-child {
+    background: var(--primary-bgr);
+    color: var(--primary-color);
+}
+
+.inventory-btn button:first-child:is(:hover, :focus) {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.inventory-btn button:last-child {
+    background: var(--ter-light-color);
+    color: var(--ter-dark-color);
+}
+
+.inventory-btn button:last-child:is(:hover, :focus) {
+    background: var(--ter-dark-color);
+    color: var(--white);
+}
+
+/* 2nd POPUP  */
+
+.particularDetails .pussy {
+    background: var(--ter-light-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 8px;
+    float: right;
+}
+
+.pussy svg {
+    fill: var(--ter-dark-color);
+}
+
+.particularDetails .particularData {
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0 5px;
+}
+
+.project-refr .inName {
+    font-size: 12px;
+    color: var(--designation-color);
+    font-weight: 500;
+}
+
+.project-refr .inData {
+    font-weight: 600;
+    /* text-wrap: wrap */
+}
+
+.itemsTable {
+    margin-top: 0.9rem;
+    margin-bottom: 0.9rem;
+    width: 100%;
+    /* min-width: 350px; */
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    ;
+}
+
+.itemsTable thead tr {
+    background: var(--primary-bgr);
+    color: var(--primary-color);
+    text-align: left;
+    font-weight: 600;
+}
+
+.itemsTable tr td {
+    font-weight: 500;
+}
+
+.itemsTable :is(th, td) {
+    padding: 12px 15px;
+}
+
+.itemsTable tbody tr {
+    border-bottom: 1px solid var(--primary-outline);
+}
+
+.itemsTable tbody tr:nth-of-type(even) {
+    background: var(--primary-light-color);
+    color: var(--primary-color);
+}
+
+.itemsTable tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.itemsTable tbody tr:last-of-type td {
+    font-weight: 800;
+}
+
+@media (max-width: 480px) {
+    .inventory-item {
+        gap: 8px;
+    }
+
+    .inventory-details .inData {
+        /* font-size: 13px; */
+    }
+
+    .inventoryList-details,
+    .particularDetails {
+        width: 100% !important;
+    }
+
+    .project-refr .inName {
+        font-size: 12px;
+    }
+
+    .project-refr .inData {
+        font-size: 14px;
+    }
+
+    .itemsTable :is(th, td) {
+        padding: 5px 8px;
+    }
+
+    .itemsTable thead th {
+        font-size: 12px;
+    }
+
+    .itemsTable tbody td {
+        font-weight: 600;
+    }
+}
