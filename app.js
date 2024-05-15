@@ -28,7 +28,8 @@ const finance = require('./routes/admin/financeRoute')
 const financeExpense = require('./routes/admin/financeRoute.expance')
 const nitify = require('./routes/admin/notificationRoute')
 
-const apiRoute = require('./routes/admin/projectRoute.js')
+const apiRoute = require('./routes/admin/projectRoute.js');
+const materialRouter = require('./routes/admin/materialsRoute.js');
 
 
 // // Employees
@@ -56,10 +57,13 @@ app.use('/admin/user-manager', userManager)
 app.use('/admin/settings', settings)
 app.use('/admin/finance', finance)
 app.use('/admin/finance/expenses', financeExpense)
+app.use('/apiv1', materialRouter)
 
 // app.use('/apiV1', tasks)
 app.use('/apiv1', apiRoute)
 app.use('/apiv1', nitify)
+
+
 
 
 // // For Employees ************
