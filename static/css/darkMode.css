@@ -2,12 +2,12 @@ body.dark{
     --black: hsl(0, 0%, 100%);
     --black-light: hsla(260, 100%, 90%, 0.4);
     --black-light-2: hsla(260, 100%, 90%, 0.8);
-    --white: rgb(16, 20, 24);
+    --white: #0B1623;
 
     --bg-color: hsl(260, 45%, 25%);
     --bg-hover: hsla(260, 19%, 15%, 0.4);
     --bg-2: hsl(255, 54%, 15%);
-    --bg-3: hsl(255, 61%, 15%);
+    --bg-3: hsla(255, 61%, 15%, 0.3);
 
     --primary-color: hsl(260, 50%, 75%);
     --primary-outline: hsla(260, 54%, 45%, 0.9);

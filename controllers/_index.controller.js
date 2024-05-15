@@ -63,7 +63,15 @@ exports.expense = (req, res) => {
         })
     }
 }
-
+//INVENTORY
+exports.inventory = (req, res) => {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const query = `select * from subtask;select * from mis_subtask;select * from amount_split`
+        db.query(query, (err, result, field) => {
+            res.status(200).render('../views/admin/inventory.ejs', { data: result })
+        })
+    }
+}
 
 //---Normal project form works-------
 exports.insertNewNormalDeal = async (req, res) => {
