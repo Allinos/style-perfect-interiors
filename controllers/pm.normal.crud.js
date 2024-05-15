@@ -86,6 +86,28 @@ exports.removeEmployeeToProject = async (req, res) => {
   })
 }
 
+exports.addContractualEmp = async function(req, res) {  // contract employee
+   const q = "INSERT INTO contractual_emp (ndeal_id, category_id, emp_name, designation) VALUES (?, ?, ?, ?)"
+   await databaseCon.query(q, [req.body.ndealid, req.body.catid, req.body.emp, req.body.desig], (err, respond)=> {
+      if (!err) {
+        res.status(200).send({msg : 'employee added successfully!'})
+      } else {
+        res.status(500).send({msg : "something error occured!"})
+      }
+   })
+}
+
+exports.removeContractualEmp = async function(req, res) {  // contract employee
+  const q = `DELETE FROM contractual_emp WHERE ndeal_id=? AND category_id=? AND cempid=${req.body.empid}`
+  await databaseCon.query(q, [req.body.ndealid, req.body.catid ], (err, respond)=> {
+     if (!err) {
+       res.status(200).send({msg : 'employee deleted successfully!'})
+     } else {
+       res.status(500).send({msg : "something error occured!"})
+     }
+  })
+}
+
 
 
 //-------normal project subtask-------------------

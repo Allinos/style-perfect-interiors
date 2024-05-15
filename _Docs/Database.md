@@ -8,11 +8,13 @@ create table adminauth(
  role varchar(10) default "admin"
 );
 
-create table deals (
+
+//done
+create table deals ( 
  id bigint primary key auto_increment,
  deal_name varchar(200),
  reference_no int,
- contact int,
+ contact varchar(15),
  agreement_amount int,
  work_name varchar(300),
  email varchar(80),
