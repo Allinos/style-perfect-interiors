@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/admin/main.css">
+    <link rel="stylesheet" href="../../css/darkMode.css">
+    <link rel="stylesheet" href="../../css/admin/header.css">
+    <link rel="stylesheet" href="../../css/admin/responsive.css">
+    <link rel="stylesheet" href="../../css/admin/np.finance.css">
+    <link rel="stylesheet" href="../../css/admin/user.css">
+    <link rel="stylesheet" href="../../css/admin/inventory.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/admin/dashboard.module.js"></script>
+</head>
+
+<body>
+
+    <%- include('../partials/admin.header.ejs') %>
+        <!-- MAIN SECTION STARTS HERE  -->
+        <main class="main" data-app-page="inventory">
+            <div class="userContainer uform">
+                <h4 class="uppercase">inventory</h4>
+                <button class="uppercase" onclick="addInventoryExpense()" id="">
+                    <span>Add item</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                        <path fill="##000000"
+                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="inventory-container">
+                <div class="inventory-item flex">
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Ref No.</p>
+                        <p class="inData">01/F/6C</p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Project name</p>
+                        <p class="inData">Commercial Residential Complex City</p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Particulars</p>
+                        <p class="inData">Bricks/Cement/Concrete</p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Quantity</p>
+                        <p class="inData">1KG</p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Amount</p>
+                        <p class="inData">&#8377;<span>10,000</span></p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Total</p>
+                        <p class="inData">&#8377;<span>50,000</span></p>
+                    </div>
+                    <div class="inventory-details" onclick="showInventory()">
+                        <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                id="angle-double-right" class="svg">
+                                <path fill="##000000"
+                                    d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
+                                </path>
+                            </svg></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-info">
+                <%- include('../partials/pagin.ejs') %>
+            </div>
+
+            <!-- --DROPDOWN-- -->
+            <div class="inventoryList one">
+                <div class="inventoryList-details two">
+                    <form action="#">
+
+                        <!-- ---SELECT A PROJECT--  -->
+                        <div class="ref-list flex">
+                            <label for="">Select Ref No.</label>
+                            <select name="" id="refNo" onchange="proceedDiv()">
+                                <option value="" disabled>Select Ref No.</option>
+                                <option value="">01/f12</option>
+                                <option value="">01/93/cc</option>
+                                <option value="">01/93/dr</option>
+                            </select>
+                        </div>
+
+                        <!-- -- PROJECT DETAILS--  -->
+                        <div class="project-inv">
+                            <div class="field">
+                                <label for="" class="uppercase">Project Name</label>
+                                <p class="pro-name uppercase">Residential Commercial Gym</p>
+                            </div>
+
+                            <!-- --PARTICULARS-- -->
+                            <div class="inv-particular flex common"><!-- Append ANOTHER ITEM -->
+                                <div class="field">
+                                    <label for="" class="uppercase">Particulars</label>
+                                    <select name="" id="" onchange="">
+                                        <option value="">Bricks</option>
+                                        <option value="">Cement</option>
+                                        <option value="">Fevicol</option>
+                                        <option value="">Tiles</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Quantity</label>
+                                    <input type="text" name="quantity" id="">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Amount(In Rs)</label>
+                                    <input type="text" name="amount" id="">
+                                </div>
+                                <!-- --------------  -->
+                            </div>
+                            <!-- ----------------------------  -->
+                            <!-- <div class="inv-particular flex custom">Append custom ITEM -->
+                                <!-- <div class="field">
+                                    <label for="" class="uppercase">Particulars</label>
+                                    <input type="text" name="particulars" id="">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Quantity</label>
+                                    <input type="text" name="quantity" id="">
+                                </div>
+                                <div class="field">
+                                    <label for="" class="uppercase">Amount(In Rs)</label>
+                                    <input type="text" name="amount" id="">
+                                </div> -->
+                                <!-- --------------  -->
+                            <!-- </div> -->
+                        </div>
+                        <!-- -----------  -->
+
+                        <!-- ---ADD ANOTHER FIELD BUTTON--  -->
+                        <div class="inventory-add-item flex">
+                            <button class="uppercase" onclick="addInventory()" id="">
+                                <span>Add another field</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                    <path fill="##000000"
+                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="uppercase" onclick="addCustom()" id="">
+                                <span>Add custom field</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                    <path fill="##000000"
+                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="inventory-btn flex">
+                            <button class="uppercase" onclick="">update</button>
+                            <button class="uppercase" onclick="closeInventoryExpense()">cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                
+            </div>
+
+            <!-- --INVENTORY LISTS-- -->
+            <div class="inventoryList-popup one">
+                <!-- --PARTICULARS DETAILS-- -->
+                <div class="particularDetails two">
+                    <p class="pussy" onclick="closeInventory()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="times" class="svg"><path fill="" d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path></svg></p>
+                    <div class="particularData flex">
+                        <div class="project-refr">
+                            <p class="inName uppercase">Ref No.</p>
+                            <p class="inData">01/F/6C</p>
+                        </div>
+                        <div class="project-refr">
+                            <p class="inName uppercase">Project name</p>
+                            <p class="inData">Commercial Residential Complex City</p>
+                        </div>
+                    </div>
+                    <table class="itemsTable">
+                        <thead>
+                            <tr>
+                                <th class="uppercase">Sl No.</th>
+                                <th class="uppercase">Particulars</th>
+                                <th class="uppercase">quantity</th>
+                                <th class="uppercase">amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tableData">
+                                <td>1</td>
+                                <td>Bricks</td>
+                                <td>1000 Nos.</td>
+                                <td>&#8377;<span>50,000</span></td>
+                            </tr>
+                            <tr class="tableData">
+                                <td>1</td>
+                                <td>Bricks</td>
+                                <td>1000 Nos.</td>
+                                <td>&#8377;<span>50,000</span></td>
+                            </tr>
+                            <tr class="tableData">
+                                <td>1</td>
+                                <td>Bricks</td>
+                                <td>1000 Nos.</td>
+                                <td>&#8377;<span>50,000</span></td>
+                            </tr>
+                            <tr class="tableData">
+                                <td>1</td>
+                                <td>Bricks</td>
+                                <td>1000 Nos.</td>
+                                <td>&#8377;<span>50,000</span></td>
+                            </tr>
+                            <tr class="tableData">
+                                <td>1</td>
+                                <td>Bricks</td>
+                                <td>1000 Nos.</td>
+                                <td>&#8377;<span>50,000</span></td>
+                            </tr>
+                            <tr class="tableData">
+                                <td class="uppercase">Total</td>
+                                <td>&#8377; <span>50,000</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- JAVASCRIPT -->
+        <script src="../../js/admin/header.js"></script>
+        <script src="/js/admin/common.js"></script>
+        <script src="/js/admin/user.js"></script>
+        <script src="/js/admin/inventory.js"></script>
+</body>
+
+</html>
