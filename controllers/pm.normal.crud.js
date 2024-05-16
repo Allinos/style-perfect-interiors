@@ -30,81 +30,61 @@ exports.getEmployListToaddOrRemove = async (req, res) => {
 }
 
 exports.addEmployeeToProject = async (req, res) => {
-  const { ndeal_id, npcid, category_id, emid, title, assignDate } = req.body
+  const { ndeal_id, category_id, emid, assignDate } = req.body
   if (req.body.emid && typeof req.body.emid === "string") {
-    const q = `INSERT INTO normal_project_employee (ndeal_id, npcid ,category_id, emid, dateofassign) VALUES (${ndeal_id},${Number(npcid)}, ${category_id}, ${emid}, "${assignDate}");`
-    await databaseCon.query(q, async (err1, data) => {
+    const q = `INSERT INTO normal_project_employee (ndeal_id, category_id, emid, dateofassign) VALUES (?, ?, ?, ?, ?)`
+    await databaseCon.query(q, [ndeal_id, category_id, emid, assignDate], async (err1, data) => {
       if (!err1) {
-        // await EmailSender('add', 'normal', { ndeal_id: ndeal_id, category_id: category_id, emid: emid });
-        let q2 = `INSERT INTO emp_task_notify(emid, title, dateofnotify) VALUES(?,?,?);`
-        databaseCon.query(q2, [emid, title, assignDate], (err2, results) => {
-          if (!err2) { res.status(200).send({ msg: 'success' }); } else { res.status(500).send({ msg: err2 }) }
-        })
-      } else { res.status(500).send({ msg: err1 }) }
+        res.status(200).send({ msg: "employee added successfully" })
+      } else { res.status(500).send({ msg: "some internal error occured!" }) }
     })
+    return;
   } else if (req.body.emid) {
     const np_emp_data = []
-    const np_emp_notify = []
-    req.body.emid.forEach((el) => { np_emp_data.push([req.body.ndeal_id, req.body.npcid, req.body.category_id, el, assignDate]) })
-    req.body.emid.forEach((el) => { np_emp_notify.push([el, title + '#' + el, assignDate]) })
-    const q = `INSERT INTO normal_project_employee (ndeal_id, npcid, category_id, emid, dateofassign) VALUES ?`
+    req.body.emid.forEach((el) => { np_emp_data.push([ndeal_id, category_id, el, assignDate]) })
+    const q = `INSERT INTO normal_project_employee (ndeal_id, category_id, emid, dateofassign) VALUES ?`
     await databaseCon.query(q, [np_emp_data], (err1, data) => {
       if (!err1) {
-        // np_emp_data.forEach(async (e) => {
-        //   await EmailSender('add', 'normal', { ndeal_id: e[0], category_id: e[2], emid: e[3] });
-        // })
-        let q2 = `INSERT INTO emp_task_notify(emid, title, dateofnotify) VALUES ?;`
-        databaseCon.query(q2, [np_emp_notify], (err2, results) => {
-          if (!err2) { res.status(200).send(data); }
-          else {
-            console.log(err2)
-            res.status(500).send({ msg: err2 })
-          }
-        })
+        res.status(200).send({ msg: "employee added successfully" })
       } else {
         res.status(500).send({ msg: 'error occurred' })
       }
     })
   } else {
-    res.status(500).send({ msg: 'error occurred' })
+    res.status(500).send({ msg: 'invalid data' })
   }
 
 }
 
 exports.removeEmployeeToProject = async (req, res) => {
-  const { dealId, catId, emid, title, removeDate } = req.query;
+  const { dealId, catId, emid } = req.query;
   const q = `DELETE FROM normal_project_employee WHERE ndeal_id = ${dealId} AND category_id = ${catId} AND emid = ${emid};`
   await databaseCon.query(q, async (err1, data) => {
     if (!err1) {
-      res.status(200).send(data);
-      // await EmailSender('remove', 'normal', { ndeal_id: dealId, category_id: catId, emid: emid });
-      let q2 = `INSERT INTO emp_task_notify(emid, title, dateofnotify) VALUES(?,?,?);`
-      databaseCon.query(q2, [emid, title, removeDate], (err2, results) => {
-        if (!err2) { return; } else { res.status(500).send({ msg: err2 }) }
-      })
-    } else { res.status(500).send({ msg: "data not deleted ! some error occured..." }) }
+      res.status(200).send({msg : "employee deleted successfully!"});
+    } else { res.status(500).send({ msg: "data not deleted! some error occured..."}) }
   })
 }
 
-exports.addContractualEmp = async function(req, res) {  // contract employee
-   const q = "INSERT INTO contractual_emp (ndeal_id, category_id, emp_name, designation) VALUES (?, ?, ?, ?)"
-   await databaseCon.query(q, [req.body.ndealid, req.body.catid, req.body.emp, req.body.desig], (err, respond)=> {
-      if (!err) {
-        res.status(200).send({msg : 'employee added successfully!'})
-      } else {
-        res.status(500).send({msg : "something error occured!"})
-      }
-   })
+exports.addContractualEmp = async function (req, res) {  // contract employee
+  const q = "INSERT INTO contractual_emp (ndeal_id, category_id, emp_name, designation) VALUES (?, ?, ?, ?)"
+  await databaseCon.query(q, [req.body.ndealid, req.body.catid, req.body.emp, req.body.desig], (err, respond) => {
+    if (!err) {
+      res.status(200).send({ msg: 'employee added successfully!' })
+    } else {
+      res.status(500).send({ msg: "something error occured!" })
+    }
+  })
 }
 
-exports.removeContractualEmp = async function(req, res) {  // contract employee
-  const q = `DELETE FROM contractual_emp WHERE ndeal_id=? AND category_id=? AND cempid=${req.body.empid}`
-  await databaseCon.query(q, [req.body.ndealid, req.body.catid ], (err, respond)=> {
-     if (!err) {
-       res.status(200).send({msg : 'employee deleted successfully!'})
-     } else {
-       res.status(500).send({msg : "something error occured!"})
-     }
+exports.removeContractualEmp = async function (req, res) {  // contract employee
+  const q = `DELETE FROM contractual_emp WHERE ndeal_id=? AND category_id=? AND cempid=${req.query.empid}`
+  await databaseCon.query(q, [req.query.ndealid, req.query.catid], (err, respond) => {
+    if (!err && respond.affectedRows) {
+      res.status(200).send({ msg: 'employee deleted successfully!' })
+    } else {
+      res.status(500).send({ msg: "something error occured!" })
+    }
   })
 }
 
@@ -227,29 +207,29 @@ exports.getCheckCompletedUnpaid = async (req, res) => {
 // Update Normal and Misc task Controllers---
 
 exports.getDataToUpdate = async (req, res) => {
-   let q =`SELECT * FROM deals WHERE id = ${req.query.id}`;
-   await databaseCon.query(q, (err, results)=>{
-     if (!err) {
-       res.status(200).send({results})
-     }else{
-      res.status(500).send({msg : "Internal Server Error!"})
-     }
-   })
+  let q = `SELECT * FROM deals WHERE id = ${req.query.id}`;
+  await databaseCon.query(q, (err, results) => {
+    if (!err) {
+      res.status(200).send({ results })
+    } else {
+      res.status(500).send({ msg: "Internal Server Error!" })
+    }
+  })
 }
 
-exports.UpdateNormalProjectData = async (req, res)=>{
-   const q = `UPDATE deals SET deal_name=?, reference_no=?, contact=?, agreement_amount=?, work_name=?, email=?, city=?, total_price=?, np_deadline=? WHERE id=${req.body.dealid}`;
-   await databaseCon.query(q, [req.body.name, req.body.eref, req.body.econtact, req.body.eagre, req.body.ework, req.body.egmail, req.body.ecity, req.body.etotal, req.body.edeadline], async (err, result)=>{
-     if (!err) { 
+exports.UpdateNormalProjectData = async (req, res) => {
+  const q = `UPDATE deals SET deal_name=?, reference_no=?, contact=?, agreement_amount=?, work_name=?, email=?, city=?, total_price=?, np_deadline=? WHERE id=${req.body.dealid}`;
+  await databaseCon.query(q, [req.body.name, req.body.eref, req.body.econtact, req.body.eagre, req.body.ework, req.body.egmail, req.body.ecity, req.body.etotal, req.body.edeadline], async (err, result) => {
+    if (!err) {
       const q2 = `UPDATE normal_projects_finance SET totalamount = ? WHERE ndeal_id = ${req.body.dealid}`;
-      await databaseCon.query(q2, [req.body.etotal], (err2, result)=>{
-         if (!err2) {
-          res.status(200).send({msg : "successfull update!"})
-         }else {
-          res.status(500).send({msg: "Something Error Occured!"}); return;
-         }
+      await databaseCon.query(q2, [req.body.etotal], (err2, result) => {
+        if (!err2) {
+          res.status(200).send({ msg: "successfull update!" })
+        } else {
+          res.status(500).send({ msg: "Something Error Occured!" }); return;
+        }
       })
-     } else { res.status(500).send({msg: "Something Error Occured!"}) }
-   })
-  
+    } else { res.status(500).send({ msg: "Something Error Occured!" }) }
+  })
+
 }

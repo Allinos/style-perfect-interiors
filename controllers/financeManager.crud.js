@@ -14,32 +14,14 @@ exports.getIncom_Exp_total = async (req, res) => {
 
 //----------normal project finace----------------
 
-exports.updateNpAmountRecieved = async (req, res) => {
-  const q = `update normal_projects_finance set amount_got = ?, dateofpay = ?, modeofpay = ? where ndeal_id = ? and task = ?`
-  await dbcon.query(q, [req.body.amount_got, req.body.dateofpay, req.body.modeofpay, req.body.ndeal_id, req.body.task], (err, result) => {
+exports.addAmountRecieved = async (req, res) => {
+  const q = `INSERT INTO normal_projects_finance (ndeal_id, amount_got, dateofpay, modeofpay) VALUES (?, ?, ?, ?)`
+  await dbcon.query(q, [req.body.ndeal_id, req.body.amount_got, req.body.dateofpay, req.body.modeofpay], (err, result) => {
     if (err) {
-      res.status(500).send("some error occurred!..");
+      console.log(err);
+      return res.status(500).send("some error occurred!..");  
     }
     res.status(200).send({ msg: "added successfully" })
   })
 }
 
-//-----------Misc project finance -----------------
-
-exports.updateMpAmountGot = async (req, res) => {
-  const q1 = `update single_deal set agreement_amount	 = ? where sdid = ?`
-  await dbcon.query(q1, [req.body.amount_got, req.body.mdealid], async (err, result) => {
-    if (err) {
-      res.status(500).send("some error occurred!..");
-      return;
-    }
-    const q2 = `update misc_project_finance set amount_got = ?, dateofpay = ?, modeofpay = ? where mdeal_id = ? and task = ?`
-    await dbcon.query(q2, [req.body.amount_got, req.body.dateofpay, req.body.modeofpay, req.body.mdealid, req.body.taskid], (err2, result) => {
-      if (err2) {
-        res.status(500).send("some error occurred!..");
-        return;
-      }
-      res.status(200).send({ msg: "added successfully" })
-    })
-  })
-}

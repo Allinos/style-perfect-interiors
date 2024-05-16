@@ -7,20 +7,12 @@ http://localhost:3000/apiv1/employee/1/1
 ### API for adding employee from normal project - POST
 http://localhost:3000/apiv1/add-employee-to-project
 
-### API for adding contractual employee to normal project - POST
-http://localhost:3000/apiv1/add-employee-to-project
-<!-- {
-  "ndealid" : 1,
-  "catid" : 2,
-  "emp" : "bhavadeep",
-  "desig" : "mistri"
-} -->
-
 
 ### API for updating task status to normal project - PUT
 http://localhost:3000/apiv1/update-task-status
 <!-- status, dealId, catId -->
 
+### API for updating task deadline to normal project - PUT
 http://localhost:3000/apiv1/update-task-deadline
 <!-- date, dealId, catId -->
 

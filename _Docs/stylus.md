@@ -65,3 +65,34 @@ http://localhost:3000/apiv1/add-material-to-leftstock
 
 ### Api for getting materials from left stock - GET
 http://localhost:3000/apiv1/get-material-from-leftstock?pid=1
+
+
+
+
+<!-- finance  -->
+
+
+### Api for adding finance - POST
+http://localhost:3000/admin/finance/add-payments
+<!-- {
+  "ndeal_id" : 2,
+  "amount_got" : 2000,
+  "dateofpay" : "23/09/2003",
+  "modeofpay" : "online"
+} -->
+
+
+<!-- Employee new routes -->
+
+
+### API for adding contractual employee to normal project - POST
+http://localhost:3000/apiv1/add-contract-employee
+<!-- {
+  "ndealid" : 1,
+  "catid" : 2,
+  "emp" : "bhavadeep",
+  "desig" : "mistri"
+} -->
+
+### API for deleting contractual employee to normal project - DELETE
+http://localhost:3000/apiv1/delete-contract-employee?ndealid=1&catid=2&empid=2
