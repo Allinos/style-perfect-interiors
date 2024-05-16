@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2024 at 03:33 PM
+-- Generation Time: May 13, 2024 at 12:59 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -38,12 +38,15 @@ CREATE TABLE `adminauth` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `amount_split`
+-- Table structure for table `contractual_emp`
 --
 
-CREATE TABLE `amount_split` (
-  `cid` int(11) NOT NULL,
-  `splitvalue` varchar(100) DEFAULT NULL
+CREATE TABLE `contractual_emp` (
+  `cempid` int(11) NOT NULL,
+  `ndeal_id` bigint(20) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `emp_name` varchar(100) DEFAULT NULL,
+  `designation` varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,14 +58,14 @@ CREATE TABLE `amount_split` (
 CREATE TABLE `deals` (
   `id` bigint(20) NOT NULL,
   `deal_name` varchar(200) DEFAULT NULL,
-  `reference_no` int(11) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
+  `reference_no` varchar(20) DEFAULT NULL,
+  `contact` bigint(15) DEFAULT NULL,
   `agreement_amount` int(11) DEFAULT NULL,
   `work_name` varchar(300) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `total_price` int(11) DEFAULT NULL,
-  `split` varchar(100) DEFAULT NULL
+  `np_deadline` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -101,7 +104,7 @@ CREATE TABLE `employee` (
   `name` varchar(80) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `number` varchar(10) DEFAULT NULL,
+  `number` varchar(15) DEFAULT NULL,
   `lastLoginAt` datetime DEFAULT NULL,
   `lastLogoutAt` datetime DEFAULT NULL,
   `status` varchar(30) NOT NULL DEFAULT 'active',
@@ -140,58 +143,40 @@ CREATE TABLE `expenses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `misc_project_employee`
+-- Table structure for table `material_left`
 --
 
-CREATE TABLE `misc_project_employee` (
-  `mpeid` int(11) NOT NULL,
-  `mdeal_id` int(11) DEFAULT NULL,
-  `mstask_id` int(11) DEFAULT NULL,
-  `mpemid` int(11) DEFAULT NULL,
-  `dateofassign` varchar(50) DEFAULT '0',
-  `dateofremove` varchar(50) DEFAULT '0'
+CREATE TABLE `material_left` (
+  `mlid` bigint(20) NOT NULL,
+  `ndeal_id` bigint(20) NOT NULL,
+  `material_name` varchar(100) DEFAULT NULL,
+  `quantity` varchar(100) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `misc_project_finance`
+-- Table structure for table `material_names`
 --
 
-CREATE TABLE `misc_project_finance` (
-  `mfid` int(11) NOT NULL,
-  `mdeal_id` int(11) NOT NULL,
-  `totalamount` int(11) DEFAULT NULL,
-  `task` int(11) NOT NULL,
-  `amount_got` int(11) DEFAULT NULL,
-  `dateofpay` varchar(80) DEFAULT '0',
-  `modeofpay` varchar(50) DEFAULT NULL
+CREATE TABLE `material_names` (
+  `mnid` int(11) NOT NULL,
+  `material_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `misc_project_subtask`
+-- Table structure for table `material_used`
 --
 
-CREATE TABLE `misc_project_subtask` (
-  `mpstid` int(11) NOT NULL,
-  `mdeal_id` int(11) DEFAULT NULL,
-  `mstask_id` int(11) DEFAULT NULL,
-  `mstask_status` varchar(50) DEFAULT 'not started',
-  `dateofdeadline` varchar(50) DEFAULT '0',
-  `dateofcomplete` varchar(50) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mis_subtask`
---
-
-CREATE TABLE `mis_subtask` (
-  `msub_task_id` int(11) NOT NULL,
-  `msub_task_name` varchar(100) DEFAULT NULL
+CREATE TABLE `material_used` (
+  `muid` bigint(20) NOT NULL,
+  `ndeal_id` bigint(20) NOT NULL,
+  `material_name` varchar(100) DEFAULT NULL,
+  `quantity` varchar(100) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -261,24 +246,6 @@ CREATE TABLE `normal_project_subtask` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `single_deal`
---
-
-CREATE TABLE `single_deal` (
-  `sdid` int(11) NOT NULL,
-  `sdeal_name` varchar(200) DEFAULT NULL,
-  `reference_no` int(11) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
-  `agreement_amount` int(11) DEFAULT NULL,
-  `work_name` varchar(300) DEFAULT NULL,
-  `email` varchar(80) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `total_price` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `subtask`
 --
 
@@ -310,10 +277,12 @@ ALTER TABLE `adminauth`
   ADD PRIMARY KEY (`adm_id`);
 
 --
--- Indexes for table `amount_split`
+-- Indexes for table `contractual_emp`
 --
-ALTER TABLE `amount_split`
-  ADD PRIMARY KEY (`cid`);
+ALTER TABLE `contractual_emp`
+  ADD PRIMARY KEY (`cempid`),
+  ADD KEY `ndeal_id` (`ndeal_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `deals`
@@ -348,35 +317,24 @@ ALTER TABLE `expenses`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `misc_project_employee`
+-- Indexes for table `material_left`
 --
-ALTER TABLE `misc_project_employee`
-  ADD PRIMARY KEY (`mpeid`),
-  ADD KEY `mdeal_id` (`mdeal_id`),
-  ADD KEY `mstask_id` (`mstask_id`),
-  ADD KEY `mpemid` (`mpemid`);
+ALTER TABLE `material_left`
+  ADD PRIMARY KEY (`mlid`),
+  ADD KEY `ndeal_id` (`ndeal_id`);
 
 --
--- Indexes for table `misc_project_finance`
+-- Indexes for table `material_names`
 --
-ALTER TABLE `misc_project_finance`
-  ADD PRIMARY KEY (`mfid`),
-  ADD KEY `mdeal_id` (`mdeal_id`),
-  ADD KEY `task` (`task`);
+ALTER TABLE `material_names`
+  ADD PRIMARY KEY (`mnid`);
 
 --
--- Indexes for table `misc_project_subtask`
+-- Indexes for table `material_used`
 --
-ALTER TABLE `misc_project_subtask`
-  ADD PRIMARY KEY (`mpstid`),
-  ADD KEY `mdeal_id` (`mdeal_id`),
-  ADD KEY `mstask_id` (`mstask_id`);
-
---
--- Indexes for table `mis_subtask`
---
-ALTER TABLE `mis_subtask`
-  ADD PRIMARY KEY (`msub_task_id`);
+ALTER TABLE `material_used`
+  ADD PRIMARY KEY (`muid`),
+  ADD KEY `ndeal_id` (`ndeal_id`);
 
 --
 -- Indexes for table `normal_projects_finance`
@@ -399,6 +357,7 @@ ALTER TABLE `normal_project_cat`
 --
 ALTER TABLE `normal_project_employee`
   ADD PRIMARY KEY (`npeid`),
+  ADD UNIQUE KEY `node` (`ndeal_id`,`category_id`,`emid`),
   ADD KEY `ndeal_id` (`ndeal_id`),
   ADD KEY `category_id` (`category_id`),
   ADD KEY `emid` (`emid`);
@@ -410,12 +369,6 @@ ALTER TABLE `normal_project_subtask`
   ADD PRIMARY KEY (`npstid`),
   ADD KEY `ndeal_id` (`ndeal_id`),
   ADD KEY `stask_id` (`stask_id`);
-
---
--- Indexes for table `single_deal`
---
-ALTER TABLE `single_deal`
-  ADD PRIMARY KEY (`sdid`);
 
 --
 -- Indexes for table `subtask`
@@ -441,10 +394,10 @@ ALTER TABLE `adminauth`
   MODIFY `adm_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `amount_split`
+-- AUTO_INCREMENT for table `contractual_emp`
 --
-ALTER TABLE `amount_split`
-  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `contractual_emp`
+  MODIFY `cempid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `deals`
@@ -477,28 +430,22 @@ ALTER TABLE `expenses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `misc_project_employee`
+-- AUTO_INCREMENT for table `material_left`
 --
-ALTER TABLE `misc_project_employee`
-  MODIFY `mpeid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `material_left`
+  MODIFY `mlid` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `misc_project_finance`
+-- AUTO_INCREMENT for table `material_names`
 --
-ALTER TABLE `misc_project_finance`
-  MODIFY `mfid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `material_names`
+  MODIFY `mnid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `misc_project_subtask`
+-- AUTO_INCREMENT for table `material_used`
 --
-ALTER TABLE `misc_project_subtask`
-  MODIFY `mpstid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `mis_subtask`
---
-ALTER TABLE `mis_subtask`
-  MODIFY `msub_task_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `material_used`
+  MODIFY `muid` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `normal_projects_finance`
@@ -525,12 +472,6 @@ ALTER TABLE `normal_project_subtask`
   MODIFY `npstid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `single_deal`
---
-ALTER TABLE `single_deal`
-  MODIFY `sdid` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `subtask`
 --
 ALTER TABLE `subtask`
@@ -547,26 +488,23 @@ ALTER TABLE `task`
 --
 
 --
--- Constraints for table `misc_project_employee`
+-- Constraints for table `contractual_emp`
 --
-ALTER TABLE `misc_project_employee`
-  ADD CONSTRAINT `misc_project_employee_ibfk_1` FOREIGN KEY (`mdeal_id`) REFERENCES `single_deal` (`sdid`),
-  ADD CONSTRAINT `misc_project_employee_ibfk_2` FOREIGN KEY (`mstask_id`) REFERENCES `mis_subtask` (`msub_task_id`),
-  ADD CONSTRAINT `misc_project_employee_ibfk_3` FOREIGN KEY (`mpemid`) REFERENCES `employee` (`em_id`);
+ALTER TABLE `contractual_emp`
+  ADD CONSTRAINT `contractual_emp_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`),
+  ADD CONSTRAINT `contractual_emp_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `task` (`task_id`);
 
 --
--- Constraints for table `misc_project_finance`
+-- Constraints for table `material_left`
 --
-ALTER TABLE `misc_project_finance`
-  ADD CONSTRAINT `misc_project_finance_ibfk_1` FOREIGN KEY (`mdeal_id`) REFERENCES `single_deal` (`sdid`),
-  ADD CONSTRAINT `misc_project_finance_ibfk_2` FOREIGN KEY (`task`) REFERENCES `mis_subtask` (`msub_task_id`);
+ALTER TABLE `material_left`
+  ADD CONSTRAINT `material_left_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`);
 
 --
--- Constraints for table `misc_project_subtask`
+-- Constraints for table `material_used`
 --
-ALTER TABLE `misc_project_subtask`
-  ADD CONSTRAINT `misc_project_subtask_ibfk_1` FOREIGN KEY (`mdeal_id`) REFERENCES `single_deal` (`sdid`),
-  ADD CONSTRAINT `misc_project_subtask_ibfk_2` FOREIGN KEY (`mstask_id`) REFERENCES `mis_subtask` (`msub_task_id`);
+ALTER TABLE `material_used`
+  ADD CONSTRAINT `material_used_ibfk_1` FOREIGN KEY (`ndeal_id`) REFERENCES `deals` (`id`);
 
 --
 -- Constraints for table `normal_projects_finance`
@@ -603,17 +541,6 @@ ALTER TABLE `normal_project_subtask`
 ALTER TABLE `subtask`
   ADD CONSTRAINT `subtask_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`);
 COMMIT;
-
--- atlast modification after review
-
-ALTER TABLE deals ADD COLUMN np_deadline VARCHAR(30) AFTER total_price;
-ALTER TABLE single_deal ADD COLUMN mp_deadline VARCHAR(30) AFTER total_price;
-
-ALTER TABLE normal_project_employee
-ADD CONSTRAINT node UNIQUE (ndeal_id, category_id, emid);
-
-ALTER TABLE misc_project_employee
-ADD CONSTRAINT mpnd UNIQUE (mdeal_id, mstask_id, mpemid);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -17,7 +17,11 @@
             &#8377;<span><%= fdata.totalamount %></span>/-
         </p>
         <%  const rAmount = 100 %>
+<<<<<<< HEAD
         <p class="totalf none">&#8377;<span><%= rAmount %></span>/-
+=======
+        <p class="totalf none" onclick="openDick({dealid:<%= fdata[0].id %>})">&#8377;<span><%= rAmount %></span>/-
+>>>>>>> 0c7b7b32c3c057ff45f074743b0e4a193eb65d72
         <span class="maka">Received</span></p>
         <p class="totalf none">&#8377;<span><%= fdata?.totalamount - rAmount %></span>/-</p>
         <!-- <p class="farch cuck">&#8377;<span>40,000</span>/-</p>

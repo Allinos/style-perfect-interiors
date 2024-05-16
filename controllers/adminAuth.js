@@ -7,7 +7,7 @@ const { createHmac } = require('crypto')
 
 route.get('/', (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        res.redirect(`/admin/dashboard?from=7&to=3`)
+        res.redirect(`/admin/dashboard`)
     } else {
         res.redirect(`/admin/login`)
     }
@@ -26,7 +26,7 @@ route.post('/auth', async (req, res) => {
         const query = `SELECT email, password FROM adminauth WHERE email ='${Email}'`;
         const hash = createHmac('sha256', 'secret').update(req.body.Password).digest('hex');
         await databaseCon.query(query, (err, rows, fields) => {
-            if (err) throw new errorHandler(500, 'Something wents wrong in this Mysql Admin Auth')
+            if (err) throw new errorHandler(500,err)
             if (rows.length > 0) {
                 if (Email == rows[0].email && hash == rows[0].password) {
                     req.session.isLoggedIn = true;

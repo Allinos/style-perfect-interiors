@@ -1,6 +1,5 @@
 const db = require('../config/db.config');
 
-// Used in project
 
 exports.getProjectNameThroughRef = async (req, res)=> {
    const query = `select deal_name, work_name from deals where reference_no = ?`
@@ -28,6 +27,7 @@ exports.getAllRef = async (req, res)=> {
 }
 
 
+// INSERT INTO `deals` (`deal_name`, `reference_no`, `contact`, `agreement_amount`, `work_name`, `email`, `city`, `total_price`) VALUES ('name xinm', '110', '909090', '3000', 'kapil dev', 'dev@gmail.com', 'ghy', '30000');
 exports.addMatrialsToProject = async (req, res) => {
    const data = []
    req.body && req.body.items.forEach(elem => {
