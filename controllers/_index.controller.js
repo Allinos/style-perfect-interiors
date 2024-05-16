@@ -77,7 +77,7 @@ exports.renderNormalProjectFinance = async (req, res) => {
     await db.query(q, (err, results) => {
         if (!err) {
             console.log(results);
-            res.status(200).render('../views/admin/np.finance.ejs', { data: results })
+            res.status(200).render('../views/admin/project.finance.ejs', { data: results })
         } else {
             res.status(500).send({ msg: "something error occured" })
         }
@@ -88,7 +88,7 @@ exports.renderNormalProjectFinance = async (req, res) => {
 
 exports.renderNormalProjectForm = async (req, res) => {
     // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    res.status(200).render('../views/admin/np.form.ejs')
+    res.status(200).render('../views/admin/project.form.ejs')
     // }
 }
 
