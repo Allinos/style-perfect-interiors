@@ -2,6 +2,10 @@ const express = require('express');
 const materialRouter = express.Router();
 const materialController = require('../../controllers/material.manager')
 
+// project data routes for inventory
+materialRouter.get('/get-pname-from-ref', materialController.getProjectNameThroughRef);
+materialRouter.get('/get-all-ref', materialController.getAllRef);
+
 // project stock routes
 materialRouter.post('/add-material-to-project', materialController.addMatrialsToProject);
 materialRouter.get('/get-material-from-project', materialController.getMatrialsToProject);
