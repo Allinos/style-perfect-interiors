@@ -72,24 +72,24 @@ exports.inventory = (req, res) => {
 
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const q = `select * from deals`
-    await db.query(q, (err, results) => {
-        if (!err) {
-            console.log(results);
-            res.status(200).render('../views/admin/project.finance.ejs', { data: results })
-        } else {
-            res.status(500).send({ msg: "something error occured" })
-        }
-    })
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const q = `select * from deals`
+        await db.query(q, (err, results) => {
+            if (!err) {
+                console.log(results);
+                res.status(200).render('../views/admin/project.finance.ejs', { data: results })
+            } else {
+                res.status(500).send({ msg: "something error occured" })
+            }
+        })
 
-    // }
+    }
 }
 
 exports.renderNormalProjectForm = async (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    res.status(200).render('../views/admin/project.form.ejs')
-    // }
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        res.status(200).render('../views/admin/project.form.ejs')
+    }
 }
 
 //---Normal project form works-------
