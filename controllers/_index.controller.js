@@ -5,26 +5,26 @@ const dataUnity = require('../utils/arrange')
 
 // ---- All Index routes here ----
 exports.indexDeshboard = async (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const q = `SELECT deals.*, normal_project_cat.category_id,normal_project_cat.npcid, task.task_name, normal_project_cat.cat_status, normal_project_subtask.stask_id, subtask.sub_task_name, normal_project_subtask.stask_status, normal_project_cat.project_status, normal_project_cat.dateofdeadline FROM deals INNER JOIN normal_project_cat ON normal_project_cat.ndeal_id = deals.id INNER JOIN task ON normal_project_cat.category_id = task.task_id LEFT JOIN normal_project_subtask ON normal_project_subtask.ndeal_id = deals.id AND normal_project_subtask.category_id = normal_project_cat.category_id LEFT JOIN subtask ON subtask.sub_task_id = normal_project_subtask.stask_id ORDER BY deals.id DESC;`
-    await db.query(q, (err, results) => {
-        const grouped = {};
-        const sentData = []
-        if (!err) {
-            results.forEach(element => {
-                const key = element.id.toString();
-                if (!grouped[key]) { grouped[key] = [] }
-                grouped[key].push(element);
-            })
-            for (const key in grouped) { dataUnity(grouped[key]) }
-            for (const key in grouped) { sentData.push(grouped[key][0]) }
-            // res.status(200).send({data : sentData});
-            const sortedData = sentData.sort((a, b) => b.id - a.id);
-            // console.log(sortedData)
-            res.status(200).render('../views/admin/_index.ejs', { sortedData })
-        }
-    })
-    // } else { res.redirect('/admin/login') }
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const q = `SELECT deals.*, normal_project_cat.category_id,normal_project_cat.npcid, task.task_name, normal_project_cat.cat_status, normal_project_subtask.stask_id, subtask.sub_task_name, normal_project_subtask.stask_status, normal_project_cat.project_status, normal_project_cat.dateofdeadline FROM deals INNER JOIN normal_project_cat ON normal_project_cat.ndeal_id = deals.id INNER JOIN task ON normal_project_cat.category_id = task.task_id LEFT JOIN normal_project_subtask ON normal_project_subtask.ndeal_id = deals.id AND normal_project_subtask.category_id = normal_project_cat.category_id LEFT JOIN subtask ON subtask.sub_task_id = normal_project_subtask.stask_id ORDER BY deals.id DESC;`
+        await db.query(q, (err, results) => {
+            const grouped = {};
+            const sentData = []
+            if (!err) {
+                results.forEach(element => {
+                    const key = element.id.toString();
+                    if (!grouped[key]) { grouped[key] = [] }
+                    grouped[key].push(element);
+                })
+                for (const key in grouped) { dataUnity(grouped[key]) }
+                for (const key in grouped) { sentData.push(grouped[key][0]) }
+                // res.status(200).send({data : sentData});
+                const sortedData = sentData.sort((a, b) => b.id - a.id);
+                // console.log(sortedData)
+                res.status(200).render('../views/admin/_index.ejs', { sortedData })
+            }
+        })
+    } else { res.redirect('/admin/login') }
 
 }
 
@@ -38,54 +38,49 @@ exports.userManager = (req, res) => {
 }
 
 exports.settings = (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const query = `select * from subtask;select * from mis_subtask;select * from amount_split`
-    db.query(query, (err, result, field) => {
-        res.status(200).render('../views/admin/settings.ejs', { data: result })
-    })
-    // }
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const query = `select * from subtask;select * from task;select * from material_names`
+        db.query(query, (err, result, field) => {
+            if (!err) {
+                // res.send( result)
+                res.status(200).render('../views/admin/settings.ejs', { data: result })
+             } else {
+                res.status(500).send({ status: false, msg: "Internal error occurs!" });
+             }
+        })
+    }
 }
 
 exports.expense = (req, res) => {
-    let months = new Date().getMonth() + 1
-    let year = new Date().getFullYear()
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT * FROM expenses WHERE date LIKE '%${months}/${year}%' ORDER BY id DESC ;
-         SELECT 'normal_projects_finance' AS tName, SUM(amount_got) AS total_amount_got, SUM(CASE WHEN modeofpay='online' THEN amount_got ELSE 0 END) AS online_sum, SUM(CASE WHEN modeofpay='cash' THEN amount_got ELSE 0 END) AS cash_sum FROM normal_projects_finance GROUP BY tName;
+        const query = `SELECT * FROM expenses ORDER BY id DESC LIMIT 50;SELECT 'normal_projects_finance' AS tName, SUM(amount_got) AS total_amount_got, SUM(CASE WHEN modeofpay='online' THEN amount_got ELSE 0 END) AS online_sum, SUM(CASE WHEN modeofpay='cash' THEN amount_got ELSE 0 END) AS cash_sum FROM normal_projects_finance GROUP BY tName;
         SELECT  SUM(total_price) AS total_sum FROM deals;SELECT SUM(CASE WHEN md_type ='cash' THEN amount ELSE 0 END) AS cash_expenses, sum(case when md_type ='online' THEN amount ELSE 0 END) as online_expenses FROM expenses;`
         db.query(query, (err, result, field) => {
             res.status(200).render('../views/admin/expense.finance.ejs', { data: result })
             // res.send(result)
-
         })
     }
 }
 //INVENTORY
 exports.inventory = (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const query = `select * from subtask;select * from mis_subtask;select * from amount_split`
-    db.query(query, (err, result, field) => {
-        res.status(200).render('../views/admin/inventory.ejs', { data: result })
-    })
-    // }
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+        const query = `SELECT * FROM material_used`
+        db.query(query, (err, result, field) => {
+            if (!err) {
+                // res.send( result)
+                res.status(200).render('../views/admin/inventory.ejs', { data: result })
+             } else {
+                res.status(500).send({ status: false, msg: "Internal error occurs!" });
+             }
+        })
+    }
 }
 
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
-<<<<<<< HEAD
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const q = `select * from deals`
-    await db.query(q, (err, results) => {
-        if (!err) {
-            console.log(results);
-            res.status(200).render('../views/admin/project.finance.ejs', { data: results })
-        } else {
-            res.status(500).send({ msg: "something error occured" })
-        }
-    })
-=======
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const q = `select * from deals`
+        const q = `SELECT normal_projects_finance.fid,deals.reference_no,deals.deal_name,deals.city, normal_projects_finance.ndeal_id,sum(normal_projects_finance.totalamount) as total_amount, sum(normal_projects_finance.amount_got) as amount_get  FROM normal_projects_finance
+        JOIN deals on normal_projects_finance.ndeal_id= deals.id GROUP by ndeal_id;`;
         await db.query(q, (err, results) => {
             if (!err) {
                 console.log(results);
@@ -94,8 +89,6 @@ exports.renderNormalProjectFinance = async (req, res) => {
                 res.status(500).send({ msg: "something error occured" })
             }
         })
->>>>>>> 0c7b7b32c3c057ff45f074743b0e4a193eb65d72
-
     }
 }
 

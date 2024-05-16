@@ -41,7 +41,7 @@
                                     d="M20,8.94a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19l-.09,0A.88.88,0,0,0,13.05,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V9S20,9,20,8.94ZM14,5.41,16.59,8H15a1,1,0,0,1-1-1ZM18,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4h5V7a3,3,0,0,0,3,3h3Z">
                                 </path>
                             </svg>
-                            <p class="set">Miscellaneous Task</p>
+                            <p class="set">Task</p>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down" class="svg">
                             <path fill="##000000"
@@ -64,11 +64,11 @@
                             </button>
                         </div>
                         <div class="btasks">
-                            <% data[1].forEach(mtask=>{ %>
+                            <% data[1].forEach(task=>{ %>
                                 <ul class="listContainer">
-                                    <li class="setTask" data-elmId="<%= mtask.msub_task_id %>">
+                                    <li class="setTask" data-elmId="<%= task.task_id %>">
                                         <span class="ttext">
-                                            <%= mtask.msub_task_name %>
+                                            <%= task.task_name %>
                                         </span>
                                         <span class="icon" onclick="ModelOpen(this,0)"><svg
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen">
@@ -140,7 +140,7 @@
                                     d="M20,8.94a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19l-.09,0A.88.88,0,0,0,13.05,2H7A3,3,0,0,0,4,5V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V9S20,9,20,8.94ZM14,5.41,16.59,8H15a1,1,0,0,1-1-1ZM18,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V5A1,1,0,0,1,7,4h5V7a3,3,0,0,0,3,3h3Z">
                                 </path>
                             </svg>
-                            <p class="set">Split Ratio</p>
+                            <p class="set">Material List</p>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down" class="svg">
                             <path fill="##000000"
@@ -162,11 +162,11 @@
                             </button>
                         </div>
                         <div class="btasks">
-                            <% data[2].forEach(split=>{ %>
+                            <% data[2].forEach(meterial_name=>{ %>
                                 <ul class="listContainer">
-                                    <li class="setTask" data-elmId="<%= split.cid %>">
+                                    <li class="setTask" data-elmId="<%= meterial_name.mnid %>">
                                         <span class="ttext">
-                                            <%= split.splitvalue %>
+                                            <%= meterial_name.material_name %>
                                         </span>
                                         <span class="icon" onclick="ModelOpen(this,2)"><svg
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen">

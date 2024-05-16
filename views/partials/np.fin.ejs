@@ -2,31 +2,24 @@
     <div class="ahead finegrid">
         <p class="ref">
             <span class="uppercase hide block phead">Ref. No.</span>
-            <span><%= fdata?.reference_no %></span>
+            <span><%= data?.reference_no %></span>
         </p>
         <p class="pro">
             <span class="uppercase hide block phead">name of work</span>
-            <span><%= fdata.deal_name %></span>
+            <span><%= data.deal_name %></span>
         </p>
         <p class="emp_date">
             <span class="uppercase hide block phead">location</span>
-            <span><%= fdata.city %></span>
+            <span><%= data.city %></span>
         </p>
         <p class="totalf">
             <span class="uppercase hide block phead">project amount</span>
-            &#8377;<span><%= fdata.totalamount %></span>/-
+            &#8377;<span><%= data.total_amount %></span>/-
         </p>
         <%  const rAmount = 100 %>
-<<<<<<< HEAD
-        <p class="totalf none">&#8377;<span><%= rAmount %></span>/-
-=======
-        <p class="totalf none" onclick="openDick({dealid:<%= fdata[0].id %>})">&#8377;<span><%= rAmount %></span>/-
->>>>>>> 0c7b7b32c3c057ff45f074743b0e4a193eb65d72
+        <p class="totalf none" onclick="openDick({dealid:<%= data.fid %>})">&#8377;<span><%= data.amount_get %></span>/-
         <span class="maka">Received</span></p>
-        <p class="totalf none">&#8377;<span><%= fdata?.totalamount - rAmount %></span>/-</p>
-        <!-- <p class="farch cuck">&#8377;<span>40,000</span>/-</p>
-        <p class="fstru cuck">&#8377;<span>40,000</span>/-</p>
-        <p class="fthrd cuck">&#8377;<span>20,000</span>/-</p> -->
+        <p class="totalf none">&#8377;<span><%= data?.total_amount - data.amount_get %></span>/-</p>
         <p class="arrow-down">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
                 class="svg">
@@ -37,7 +30,7 @@
         </p>
     </div>
     <!-- ----------open data for accordion---------- -->
-    <div class="adata fdata">
+    <div class="adata data">
         <div class="finance_expand">
             <!-- --INSTALLMENT-- -->
             <div class="installment flex">

@@ -54,8 +54,8 @@ exports.updateSubtask = async (req, res) => {
    })
 }
 
-exports.getAmountSplit = async (req, res) => {
-   const q = "select splitvalue from amount_split"
+exports.getMaterial = async (req, res) => {
+   const q = "select material_name from material_names"
    await databaseCon.query(q, (err, results) => {
       if (!err) {
          res.status(200).send({ status: true, msg: 'Successfully added Miscellaneous Task',data:results })
@@ -65,8 +65,8 @@ exports.getAmountSplit = async (req, res) => {
    })
 
 }
-exports.setAmountSplit = async (req, res) => {
-   const q = "INSERT INTO amount_split (splitvalue) VALUES(?)"
+exports.setMaterial = async (req, res) => {
+   const q = "INSERT INTO material_names (material_name) VALUES(?)"
    await databaseCon.query(q, [req.body.splitValue],
       (err, results) => {
          if (!err) {
@@ -78,8 +78,8 @@ exports.setAmountSplit = async (req, res) => {
       })
 
 }
-exports.updateAmountSplit = async (req, res) => {
-   const q = `UPDATE amount_split SET  splitvalue =?  WHERE cid =${req.params.id}`
+exports.updateMaterial = async (req, res) => {
+   const q = `UPDATE material_names SET  material_name =?  WHERE mnid =${req.params.id}`
    await databaseCon.query(q, [req.body.splitValue],
       (err, results) => {
          if (!err) {
