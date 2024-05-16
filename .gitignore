@@ -3,3 +3,4 @@
 /.env.development
 /src/storage/error.log
 /sessions/loginAuth.db
+/tes.js
