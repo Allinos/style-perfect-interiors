@@ -36,7 +36,9 @@ document.querySelectorAll(`.assign-to`).forEach((item, index) => {
 
     })
 })
-
+function Opn_addProjectEmp(){
+    document.querySelector('.another-emp').classList.toggle('flex')
+}
 
 function closeSubBox() {
     const mainDrop = document.querySelector('.main-dropdown')

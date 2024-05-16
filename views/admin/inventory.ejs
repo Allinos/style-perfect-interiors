@@ -78,7 +78,7 @@
             <!-- --DROPDOWN-- -->
             <div class="inventoryList one">
                 <div class="inventoryList-details two">
-                    <form action="#">
+                    <form action="">
 
                         <!-- ---SELECT A PROJECT--  -->
                         <div class="ref-list flex">
@@ -140,7 +140,7 @@
 
                         <!-- ---ADD ANOTHER FIELD BUTTON--  -->
                         <div class="inventory-add-item flex">
-                            <button class="uppercase" onclick="addInventory()" id="">
+                            <button class="uppercase" type="button" onclick="addInventory()" id="">
                                 <span>Add another field</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                                     <path fill="##000000"
@@ -148,7 +148,7 @@
                                     </path>
                                 </svg>
                             </button>
-                            <button class="uppercase" onclick="addCustom()" id="">
+                            <button class="uppercase" type="button" onclick="addCustom()" id="">
                                 <span>Add custom field</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                                     <path fill="##000000"
@@ -158,8 +158,8 @@
                             </button>
                         </div>
                         <div class="inventory-btn flex">
-                            <button class="uppercase" onclick="">update</button>
-                            <button class="uppercase" onclick="closeInventoryExpense()">cancel</button>
+                            <button class="uppercase" type="submit" onclick="">update</button>
+                            <button class="uppercase" type="reset" onclick="closeInventoryExpense()">cancel</button>
                         </div>
                     </form>
                 </div>

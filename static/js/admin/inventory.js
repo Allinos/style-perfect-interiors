@@ -19,7 +19,7 @@ function proceedDiv(){
 
 }
 
-async function addInventory(){
+function addInventory(){
     let particularItem = document.querySelector(`.inv-particular`);
     let newItem = document.createElement('div');
     newItem.classList.add('inv-particular', 'flex', 'common');
@@ -44,7 +44,7 @@ async function addInventory(){
     console.log(particularItem.parentNode);
 
 }
-async function addCustom(){
+function addCustom(){
     let particularItem = document.querySelector(`.inv-particular`);
     let newItem = document.createElement('div');
     newItem.classList.add('inv-particular', 'flex', 'custom');
@@ -67,6 +67,7 @@ async function addCustom(){
 
 function showInventory(){
     document.querySelector(`.inventoryList-popup`).classList.add('active');
+    
 }
 function closeInventory(){
     document.querySelector(`.inventoryList-popup`).classList.remove('active');
