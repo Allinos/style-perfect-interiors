@@ -1,9 +1,7 @@
 const db = require('../config/db.config');
 
-// Used in project
 
 // INSERT INTO `deals` (`deal_name`, `reference_no`, `contact`, `agreement_amount`, `work_name`, `email`, `city`, `total_price`) VALUES ('name xinm', '110', '909090', '3000', 'kapil dev', 'dev@gmail.com', 'ghy', '30000');
-
 exports.addMatrialsToProject = async (req, res) => {
    const data = [[1, 'gum', '1pc', 200], [1, 'rope', '3pc', 100], [1, 'color', '1ltr', 700]]
    const q = "INSERT INTO material_used (ndeal_id, material_name, quantity, price) VALUES ?"

@@ -71,6 +71,16 @@ create table normal_project_employee (
     foreign key(emid) references employee(em_id)
 );
 
+CREATE TABLE `expenses` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `remark` varchar(355) DEFAULT NULL,
+  `amount` int(50) NOT NULL,
+  `date` varchar(20) NOT NULL,
+  `md_type` varchar(10) NOT NULL
+) ;
+
+
 -- finance section-- 
 
 create table normal_projects_finance(
