@@ -2,24 +2,29 @@
     <div class="ahead finegrid">
         <p class="ref">
             <span class="uppercase hide block phead">Ref. No.</span>
-            <span><%= fdata[0].reference_no %></span>
+            <span><%= fdata?.reference_no %></span>
         </p>
         <p class="pro">
             <span class="uppercase hide block phead">name of work</span>
-            <span><%= fdata[0].deal_name %></span>
+            <span><%= fdata.deal_name %></span>
         </p>
         <p class="emp_date">
             <span class="uppercase hide block phead">location</span>
-            <span><%= fdata[0].city %></span>
+            <span><%= fdata.city %></span>
         </p>
         <p class="totalf">
             <span class="uppercase hide block phead">project amount</span>
-            &#8377;<span><%= fdata[0].totalamount %></span>/-
+            &#8377;<span><%= fdata.totalamount %></span>/-
         </p>
+<<<<<<< HEAD
+        <%  const rAmount = 100 %>
+        <p class="totalf none">&#8377;<span><%= rAmount %></span>/-
+=======
         <%  const rAmount = fdata?.reduce((acc, curr) => acc + curr.amount_got, 0); %>
         <p class="totalf none" onclick="openDick({dealid:<%= fdata[0].id %>})">&#8377;<span><%= rAmount %></span>/-
+>>>>>>> 1e6066bb9204581afb3fa25af25f841b35c3709d
         <span class="maka">Received</span></p>
-        <p class="totalf none">&#8377;<span><%= fdata[0]?.totalamount - rAmount %></span>/-</p>
+        <p class="totalf none">&#8377;<span><%= fdata?.totalamount - rAmount %></span>/-</p>
         <!-- <p class="farch cuck">&#8377;<span>40,000</span>/-</p>
         <p class="fstru cuck">&#8377;<span>40,000</span>/-</p>
         <p class="fthrd cuck">&#8377;<span>20,000</span>/-</p> -->

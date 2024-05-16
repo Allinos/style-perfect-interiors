@@ -127,3 +127,7 @@ create table contractual_emp(
   foreign key(ndeal_id) references deals(id),
   foreign key(category_id) references task(task_id)
 )
+
+-- extra 
+
+ALTER TABLE `deals` ADD `np_deadline` VARCHAR(50) NULL DEFAULT NULL AFTER `total_price`;
