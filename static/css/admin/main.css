@@ -509,7 +509,7 @@
 }
 
 .main-dropdown .drop-btn button {
-    padding: 12px;
+    padding: 8px;
     border-radius: var(--border-radius-1);
     font-size: 16px;
     font-weight: 700;
@@ -663,7 +663,11 @@
     background: var(--secondary-color);
     color: var(--white);
 }
-
+.employeeList .eheader{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--grey);
+}
 /* -------TASK MENU DROPDOWN-------- */
 .main-dropdown .task-drop-menu {
     display: none;

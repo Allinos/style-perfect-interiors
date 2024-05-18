@@ -25,14 +25,31 @@
         <main class="main" data-app-page="inventory">
             <div class="userContainer uform">
                 <h4 class="uppercase">inventory</h4>
-                <button class="uppercase" onclick="addInventoryExpense()" id="">
-                    <span>Add item</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
-                        <path fill="##000000"
-                            d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
-                        </path>
-                    </svg>
-                </button>
+                <div class="side-btn flex">
+                    <div class="filter">
+                        <span class="btn" onclick="options()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="sliders-v-alt" class="svg"><path fill="" d="M20,8.18V3a1,1,0,0,0-2,0V8.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V13.82a3,3,0,0,0,0-5.64ZM19,12a1,1,0,1,1,1-1A1,1,0,0,1,19,12Zm-6,2.18V3a1,1,0,0,0-2,0V14.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V19.82a3,3,0,0,0,0-5.64ZM12,18a1,1,0,1,1,1-1A1,1,0,0,1,12,18ZM6,6.18V3A1,1,0,0,0,4,3V6.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V11.82A3,3,0,0,0,6,6.18ZM5,10A1,1,0,1,1,6,9,1,1,0,0,1,5,10Z"></path></svg>
+                        </span>
+                        <div class="filter-options hide">
+                            <p class="uppercase">Consumables</p>
+                            <p class="uppercase">Leftovers</p>
+                        </div>
+                    </div>
+                    <div class="addItem">
+                        <button class="uppercase" onclick="opener()" id="">
+                            <span>Add item</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
+                                <path fill="##000000"
+                                    d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="add-btn flex hide">
+                            <p class="uppercase" onclick="openInventoryExpense()">Inventory</p>
+                            <p class="uppercase" onclick="openStockExpense()">stock</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="inventory-container">
                 <div class="inventory-item flex">
@@ -79,7 +96,9 @@
             <div class="inventoryList one">
                 <div class="inventoryList-details two">
                     <form action="">
-
+                        <div class="inStock hide">
+                            <p class="uppercase">Style Perfect Interior (Inventory)</p>
+                        </div>
                         <!-- ---SELECT A PROJECT--  -->
                         <div class="ref-list flex">
                             <label for="">Select Ref No.</label>
@@ -140,7 +159,7 @@
 
                         <!-- ---ADD ANOTHER FIELD BUTTON--  -->
                         <div class="inventory-add-item flex">
-                            <button class="uppercase" type="button" onclick="addInventory()" id="">
+                            <button class="uppercase" type="button" onclick="addField()" id="">
                                 <span>Add another field</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                                     <path fill="##000000"
@@ -148,7 +167,7 @@
                                     </path>
                                 </svg>
                             </button>
-                            <button class="uppercase" type="button" onclick="addCustom()" id="">
+                            <button class="uppercase" type="button" onclick="addCustomField()" id="">
                                 <span>Add custom field</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                                     <path fill="##000000"

@@ -7,6 +7,7 @@ api.get('/employee/:dealId/:catId', pmNormalAPI.getEmployListPerProject)
 api.get('/get-employee', pmNormalAPI.getEmployListToaddOrRemove)
 api.post('/add-employee-to-project', pmNormalAPI.addEmployeeToProject)
 api.delete('/removeempnp', pmNormalAPI.removeEmployeeToProject)
+api.get('/get-contract-emp-to-project', pmNormalAPI.getContractEmployeePerProject)
 api.post('/add-contract-employee', pmNormalAPI.addContractualEmp)
 api.delete('/delete-contract-employee', pmNormalAPI.removeContractualEmp)
 

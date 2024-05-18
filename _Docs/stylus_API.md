@@ -94,5 +94,9 @@ http://localhost:3000/apiv1/add-contract-employee
   "desig" : "mistri"
 } -->
 
-### API for deleting contractual employee to normal project - DELETE
+### API for deleting contractual employee to project - DELETE
 http://localhost:3000/apiv1/delete-contract-employee?ndealid=1&catid=2&empid=2
+
+
+### API for getting contractual employee to project - GET
+http://localhost:3000/apiv1/get-contract-emp-to-project?dealId=1&catId=1
