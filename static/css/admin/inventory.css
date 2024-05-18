@@ -4,13 +4,63 @@
     overflow-y: scroll;
 
 }
-
-.inventory-container::-webkit-scrollbar {
-    display: block;
-    scrollbar-color: black;
-    scrollbar-width: 10px;
+/* filter */
+.filter{
+    position: relative;
 }
-
+.filter .btn{
+    background: var(--sec-light-color);
+}
+.filter .btn svg{
+    fill: var(--secondary-color);
+}
+.filter .btn:hover{
+    background: var(--secondary-color);
+}
+.filter .btn:hover svg{
+    fill: var(--white) !important;
+}
+.filter-options, .add-btn{
+    position: absolute;
+    top: 2rem;
+    right: 2.2rem;
+    background: var(--white);
+    /* padding: 9px 12px; */
+    line-height: 2;
+    border-radius: var(--border-radius-1);
+    box-shadow: var(--box-shadow-1);
+    outline: 1px solid var(--sec-outline);
+    cursor: pointer;
+}
+.add-btn{
+    padding: 0.5rem 0.8rem;
+    right: 0;
+    top: 3rem;
+}
+.filter-options p:hover{
+    background: var(--primary-light-color);
+}
+.filter-options p{
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 0.5rem 2rem;
+    border-bottom: 1px solid var(--sec-outline);
+}
+.addItem{
+    position: relative;
+}
+.add-btn p{
+     background: var(--primary-light-color);
+     color: var(--primary-color);
+     text-align: center;
+     border-radius: var(--border-radius-1);
+     outline: 1px solid var(--sec-outline);
+     font-weight: 600;
+     font-size: 14px;
+     padding: 0 10px;
+}
 .inventory-item {
     background: var(--white);
     border-radius: var(--border-radius-2);
@@ -84,7 +134,16 @@
 :is(.inventoryList, .inventoryList-popup).active {
     display: block;
 }
-
+.inStock p{
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding: 12px;
+    font-size: 1.1rem;
+    text-align: center;
+    background: var(--primary-light-color);
+    color: var(--primary-color);
+    border-radius: var(--border-radius-1);
+}
 .ref-list label {
     width: 100%;
 }

@@ -10,9 +10,9 @@ router.get('/get-subtask', settingsMng.getSubtask);
 router.post('/set-subtask', settingsMng.setSubtask);
 router.put('/upt-subtask/:id', settingsMng.updateSubtask);
 
-router.get('/get-amountsplit', settingsMng.getAmountSplit);
-router.post('/set-amountsplit', settingsMng.setAmountSplit);
-router.put('/upt-amountsplit/:id', settingsMng.updateAmountSplit);
+router.get('/get-material', settingsMng.getMaterial);
+router.post('/set-material', settingsMng.setMaterial);
+router.put('/upt-material/:id', settingsMng.updateMaterial);
 
 
 module.exports = router;

@@ -3,7 +3,7 @@ function AlertNotifier(status, msg, icon) {
     Swal.fire({ title: status ? 'Sucess' : 'Error', text: msg, icon: icon, confirmButtonText: 'Done' });
 }
 // ReqHandler Data  
-let ReqURI = { addMiscTask: BASE_URL + `/set-misc-task`, updMiscTask: BASE_URL + `/upt-misc-task/`, subTask: BASE_URL + `/set-subtask`, updSubTask: BASE_URL + `/upt-subtask/`, splitRatio: BASE_URL + '/set-amountsplit', updSplitRatio: BASE_URL + '/upt-amountsplit/' }
+let ReqURI = { addMiscTask: BASE_URL + `/set-misc-task`, updMiscTask: BASE_URL + `/upt-misc-task/`, subTask: BASE_URL + `/set-subtask`, updSubTask: BASE_URL + `/upt-subtask/`, splitRatio: BASE_URL + '/set-material', updSplitRatio: BASE_URL + '/upt-material/' }
 
 function addMiscTask() {
     let inputValue = document.getElementById('miscel-task');
