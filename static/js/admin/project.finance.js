@@ -40,6 +40,35 @@ async function openDick(data) {
 
 }
 
+
+async function openEdit() {
+    document.getElementsByClassName('main')[0].classList.add('flow')
+    // const { dealid } = data.dealid
+    const maindropDown = document.querySelector(`.main-dropdown`);
+    maindropDown.style.display = `block`;
+    maindropDown.innerHTML = ""
+    maindropDown.innerHTML = `<div class="advance_dropdown common_dropdown">
+    <div class="field">
+        <p class="uppercase">Installment No.</p>
+        <p class="uppercase">1</p>
+    </div>
+    <div class="flex">
+        <div class="field">
+        <label for="" class="uppercase">Amount</label>
+            <input type="text" name="" id="">
+        </div>
+        <div class="field">
+        <label for="" class="uppercase">Date</label>
+            <input type="text" name="" id="">
+        </div>
+    </div>
+    <div class = "drop-btn flex">
+        <button type="button" class="uppercase" ">update</button>
+        <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
+        </div>
+</div>`
+
+}
 (function GetIncExp() {
     let Ctn = document.getElementsByClassName('total_user_data')
     ReqHandler.GET(location.origin + '/admin/finance/get-income-expense').then((res) => {
