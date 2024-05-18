@@ -1,6 +1,12 @@
 //ADD NEW ITEMS IN INVENTORY
-function addInventoryExpense(){
+function openInventoryExpense(){
     document.querySelector(`.inventoryList`).classList.add('active');
+    document.querySelector(`.add-btn`).classList.add(`hide`);
+}
+function openStockExpense(){
+    document.querySelector(`.inventoryList`).classList.add('active');
+    document.querySelector(`.add-btn`).classList.add(`hide`);
+    document.querySelector(`.inStock`).classList.remove(`hide`);
 }
 function closeInventoryExpense(){
     document.querySelector(`.inventoryList`).classList.remove(`active`)
@@ -18,8 +24,8 @@ function proceedDiv(){
     }
 
 }
-
-function addInventory(){
+//ADD NEW ITEM
+function addField(){
     let particularItem = document.querySelector(`.inv-particular`);
     let newItem = document.createElement('div');
     newItem.classList.add('inv-particular', 'flex', 'common');
@@ -44,7 +50,7 @@ function addInventory(){
     console.log(particularItem.parentNode);
 
 }
-function addCustom(){
+function addCustomField(){
     let particularItem = document.querySelector(`.inv-particular`);
     let newItem = document.createElement('div');
     newItem.classList.add('inv-particular', 'flex', 'custom');
@@ -73,3 +79,9 @@ function closeInventory(){
     document.querySelector(`.inventoryList-popup`).classList.remove('active');
 }
 
+function options(){
+    document.querySelector(`.filter-options`).classList.toggle('hide');
+}
+function opener(){
+    document.querySelector(`.add-btn`).classList.toggle('hide');
+}
