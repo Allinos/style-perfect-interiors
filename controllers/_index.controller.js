@@ -79,7 +79,7 @@ exports.inventory = (req, res) => {
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const q = `SELECT normal_projects_finance.fid,deals.reference_no,deals.deal_name,deals.city, normal_projects_finance.ndeal_id,sum(normal_projects_finance.totalamount) as total_amount, sum(normal_projects_finance.amount_got) as amount_get  FROM normal_projects_finance
+        const q = `SELECT normal_projects_finance.fid,deals.reference_no,deals.deal_name,deals.city, deals.id,sum(normal_projects_finance.totalamount) as total_amount, sum(normal_projects_finance.amount_got) as amount_get  FROM normal_projects_finance
         JOIN deals on normal_projects_finance.ndeal_id= deals.id GROUP by ndeal_id;`;
         await db.query(q, (err, results) => {
             if (!err) {

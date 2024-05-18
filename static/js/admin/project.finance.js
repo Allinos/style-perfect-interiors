@@ -1,4 +1,40 @@
 const getFun = new DataCall()
+document.querySelectorAll(`.accordion-content`).forEach((item, index) => {
+    let header = item.querySelector(".ahead");
+    header.addEventListener("click", () => {
+        let PaymentListCtn = item.querySelector('.finance_expand')
+        if (PaymentListCtn.innerHTML.length >=30) {
+            item.classList.toggle("open");
+            let description = item.querySelector(".adata");
+            let darr = item.querySelector(`.arrow-down`);
+            if (item.classList.contains("open")) {
+                description.classList.add(`open`);
+                darr.classList.add(`open`);
+            } else {
+                description.classList.remove(`open`);
+                darr.classList.remove(`open`);
+            }
+            removeOpen(index);
+        } else {
+           getPaymentHistory(item.dataset.dealId)
+        }
+    })
+})
+function getPaymentHistory(e){
+
+}
+function removeOpen(index1) {
+    document.querySelectorAll(`.accordion-content`).forEach((item2, index2) => {
+        if (index1 != index2) {
+            item2.classList.remove("open");
+            let des = item2.querySelector(".adata");
+            des.classList.remove(`open`);
+            let arr = item2.querySelector(`.arrow-down`);
+            arr.classList.remove(`open`);
+        }
+    })
+}
+
 async function updataAdvancePay(data, e) {
     e.preventDefault();
     const target = data.dataset
@@ -7,6 +43,8 @@ async function updataAdvancePay(data, e) {
     await getFun.GET_POST('admin/finance/update-advancepay', 'PUT', advanceData, 'form')
     document.querySelector(`.main-dropdown`).style.display = `none`;;
 }
+
+
 
 async function openDick(data) {
     document.getElementsByClassName('main')[0].classList.add('flow')
@@ -46,15 +84,21 @@ async function openDick(data) {
         if (res.status) {
             Ctn[0].children[0].children[0].innerText = res.data[1][0].total_sum
             Ctn[1].children[0].children[0].innerText = res.data[0][0].cash_sum
-            Ctn[2].children[0].children[0].innerText = res.data[0][0].online_sum}
-    }).catch(err => {console.log('Error(fn-ExpsUpdate):', err);})})()
+            Ctn[2].children[0].children[0].innerText = res.data[0][0].online_sum
+        }
+    }).catch(err => { console.log('Error(fn-ExpsUpdate):', err); })
+})()
 
 function CloseModel(e) {
     document.querySelector(e).style.display = 'none'
-  }
-  function search() {
+}
+function search() {
     var inpValue = document.getElementById('searchQuery').value.toLowerCase();
     var elmCtn = document.querySelectorAll('.accordion-content');
-    elmCtn.forEach(function(e) {var contentText = e.textContent.toLowerCase();
-        if (contentText.includes(inpValue)) {e.style.display = 'block';
-        } else {e.style.display = 'none'; }});}
+    elmCtn.forEach(function (e) {
+        var contentText = e.textContent.toLowerCase();
+        if (contentText.includes(inpValue)) {
+            e.style.display = 'block';
+        } else { e.style.display = 'none'; }
+    });
+}

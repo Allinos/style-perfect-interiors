@@ -13,6 +13,13 @@ async function empPopup(target) {
             <span>Plumbing</span> -->
         </li>
     </ul>
+    <ul id="custom-emp-list">
+    
+{/* <li class="stasks">
+<input type="checkbox" name="emid" value="2">
+<span>Mintu Sharma</span>
+</li> */}
+    </ul>
     </form>
     <div class="another-btn">
     <button class="uppercase" onclick="Opn_addProjectEmp()">
@@ -26,14 +33,14 @@ async function empPopup(target) {
     <div class="another-emp">
     <div class="field">
         <label for="" class="uppercase">Name</label>
-        <input type="text" name="" id="" placeholder="Name">
+        <input type="text" name="" id="customeEmpName" placeholder="Name">
     </div>
     <div class="field">
         <label for="" class="uppercase">designation</label>
-        <input type="text" name="" id="" placeholder="Engineer">
+        <input type="text" name="" id="customeEmpMark" placeholder="Engineer">
     </div>
     <div class="field another-btn">
-        <button class="uppercase">
+        <button class="uppercase" onclick="addCustomeEmp('another-emp')">
             <span>Add</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                 <path fill="##000000"
@@ -63,7 +70,6 @@ async function empPopup(target) {
         renderTarget.innerHTML += html
     })
 }
-
 
 subPopup = async (target) => {
     document.getElementsByClassName('main')[0].classList.add('flow');
@@ -200,3 +206,21 @@ function hideMainDropdown(event) {
     mainDrops.classList.remove('active')
 }
 
+async function addCustomeEmp(e) {
+    let parentNode = document.querySelector(`.${e}`)
+    let [EmpName, EmpMark, npcid, ndealid] = [parentNode.querySelector('#customeEmpName').value
+        , parentNode.querySelector('#customeEmpMark').value, document.querySelector('[data-category_id]').dataset.category_id, document.querySelector('[data-category_id]').dataset.ndeal_id]
+    if (EmpName !== '') {
+        let res = await dataMethod.GET_POST('apiv1/add-contract-employee', 'POST', {
+            ndealid: ndealid, catid: npcid, emp: EmpName, desig: EmpMark
+        }, 'form');
+        if (res.status) {
+            AlertNotify(true, 'Custom Employee added Successfully', 'success')
+        } else { AlertNotify(false, 'Unable to Add Custom Employee', 'error') }
+    } else {
+        AlertNotify(false, 'Field Cann\'t be Empty', 'Warning',)
+    }
+}
+function getCustomeEmp() {
+
+}

@@ -61,18 +61,19 @@ exports.removeEmployeeToProject = async (req, res) => {
   const q = `DELETE FROM normal_project_employee WHERE ndeal_id = ${dealId} AND category_id = ${catId} AND emid = ${emid};`
   await databaseCon.query(q, async (err1, data) => {
     if (!err1) {
-      res.status(200).send({msg : "employee deleted successfully!"});
-    } else { res.status(500).send({ msg: "data not deleted! some error occured..."}) }
+      res.status(200).send({ msg: "employee deleted successfully!" });
+    } else { res.status(500).send({ msg: "data not deleted! some error occured..." }) }
   })
 }
 
 exports.addContractualEmp = async function (req, res) {  // contract employee
+  console.log(req.body);
   const q = "INSERT INTO contractual_emp (ndeal_id, category_id, emp_name, designation) VALUES (?, ?, ?, ?)"
   await databaseCon.query(q, [req.body.ndealid, req.body.catid, req.body.emp, req.body.desig], (err, respond) => {
     if (!err) {
-      res.status(200).send({ msg: 'employee added successfully!' })
+      res.status(200).send({ status: true, msg: 'employee added successfully!' })
     } else {
-      res.status(500).send({ msg: "something error occured!" })
+      res.status(500).send({ status: false, msg: "something error occured" + err })
     }
   })
 }

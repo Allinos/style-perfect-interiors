@@ -953,3 +953,6 @@
 .fullscreen .info-content {
     height: 78%;
 }
+#custom-emp-list{
+   height: 0vh;
+}
