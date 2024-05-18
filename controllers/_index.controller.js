@@ -72,18 +72,6 @@ exports.inventory = (req, res) => {
 
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
-<<<<<<< HEAD
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-    const q = `select * from deals`
-    await db.query(q, (err, results) => {
-        if (!err) {
-            console.log(results);
-            res.status(200).render('../views/admin/project.finance.ejs', { data: results })
-        } else {
-            res.status(500).send({ msg: "something error occured" })
-        }
-    })
-=======
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
         const q = `select * from deals`
         await db.query(q, (err, results) => {
@@ -94,7 +82,6 @@ exports.renderNormalProjectFinance = async (req, res) => {
                 res.status(500).send({ msg: "something error occured" })
             }
         })
->>>>>>> 0c7b7b32c3c057ff45f074743b0e4a193eb65d72
 
     }
 }

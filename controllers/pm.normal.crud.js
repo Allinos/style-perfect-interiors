@@ -8,7 +8,7 @@ const databaseCon = require('../config/db.config.js');
 
 exports.getEmployListPerProject = async (req, res) => {
   const { dealId, catId } = req.params
-  const q = `SELECT deals.deal_name, employee.em_id, employee.name, employee.email,  normal_project_employee.category_id, normal_project_employee.ndeal_id
+  const q = `SELECT deals.deal_name, employee.em_id, employee.name, employee.email, normal_project_employee.category_id, normal_project_employee.ndeal_id
     FROM normal_project_employee
     INNER JOIN deals ON deals.id = normal_project_employee.ndeal_id
     INNER JOIN employee ON employee.em_id = normal_project_employee.emid
@@ -18,6 +18,17 @@ exports.getEmployListPerProject = async (req, res) => {
       res.status(200).send(results);
     } else { res.status(500).send({ msg: "Something went wrong!" }) }
   })
+}
+
+exports.getContractEmployeePerProject = async function(req, res) {
+   const { dealId, catId } = req.query
+   const q = `SELECT * FROM contractual_emp WHERE ndeal_id = ${dealId} AND category_id = ${catId}`
+   await databaseCon.query(q, (err, results) => {
+     if (!err) {
+       res.status(200).send(results);
+     } else { console.log(err); res.status(500).send({ msg: "Something went wrong!" }) }
+   })
+
 }
 
 exports.getEmployListToaddOrRemove = async (req, res) => {
