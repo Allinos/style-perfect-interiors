@@ -13,13 +13,6 @@ async function empPopup(target) {
             <span>Plumbing</span> -->
         </li>
     </ul>
-    <ul id="custom-emp-list">
-    
-{/* <li class="stasks">
-<input type="checkbox" name="emid" value="2">
-<span>Mintu Sharma</span>
-</li> */}
-    </ul>
     </form>
     <div class="another-btn">
     <button class="uppercase" onclick="Opn_addProjectEmp()">
@@ -197,7 +190,6 @@ async function UpdateProjectDetails(target, type) {
         await dataMethod.GET_POST('apiv1/np-data-update', 'PUT', formUpdate, 'form');
     } else { await dataMethod.GET_POST('apiv1/misc-data-update', 'PUT', formUpdate, 'form'); }
     hideMainDropdown()
-
 }
 
 function hideMainDropdown(event) {

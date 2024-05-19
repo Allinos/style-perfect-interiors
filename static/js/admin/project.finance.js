@@ -1,46 +1,12 @@
 const getFun = new DataCall()
-document.querySelectorAll(`.accordion-content`).forEach((item, index) => {
-    let header = item.querySelector(".ahead");
-    header.addEventListener("click", () => {
-        let PaymentListCtn = item.querySelector('.finance_expand')
-        if (PaymentListCtn.innerHTML.length >=30) {
-            item.classList.toggle("open");
-            let description = item.querySelector(".adata");
-            let darr = item.querySelector(`.arrow-down`);
-            if (item.classList.contains("open")) {
-                description.classList.add(`open`);
-                darr.classList.add(`open`);
-            } else {
-                description.classList.remove(`open`);
-                darr.classList.remove(`open`);
-            }
-            removeOpen(index);
-        } else {
-           getPaymentHistory(item.dataset.dealId)
-        }
-    })
-})
-function getPaymentHistory(e){
 
-}
-function removeOpen(index1) {
-    document.querySelectorAll(`.accordion-content`).forEach((item2, index2) => {
-        if (index1 != index2) {
-            item2.classList.remove("open");
-            let des = item2.querySelector(".adata");
-            des.classList.remove(`open`);
-            let arr = item2.querySelector(`.arrow-down`);
-            arr.classList.remove(`open`);
-        }
-    })
-}
-
-async function updataAdvancePay(data, e) {
+async function AddPaymentsTODeal(data, e) {
     e.preventDefault();
     const target = data.dataset
+    console.log(target, data,e);
     const advanceData = new FormData(document.getElementById('advanced-form'));
     advanceData.append('ndeal_id', Number(target.dealid));
-    await getFun.GET_POST('admin/finance/update-advancepay', 'PUT', advanceData, 'form')
+    await getFun.GET_POST('admin/finance/add-payments', 'POST', advanceData, 'form')
     document.querySelector(`.main-dropdown`).style.display = `none`;;
 }
 
@@ -48,7 +14,7 @@ async function updataAdvancePay(data, e) {
 
 async function openDick(data) {
     document.getElementsByClassName('main')[0].classList.add('flow')
-    const { dealid } = data.dealid
+    const dealid = data.dealid;
     const maindropDown = document.querySelector(`.main-dropdown`);
     maindropDown.style.display = `block`;
     maindropDown.innerHTML = ""
@@ -70,7 +36,7 @@ async function openDick(data) {
             <input type="text" name="dateofpay" id="" placeholder="dd/mm/yyyy">
         </div>
         <div class = "drop-btn flex">
-        <button type="button" class="uppercase" data-dealid=${dealid} onclick="updataAdvancePay(this, event)">update</button>
+        <button type="button" class="uppercase" data-dealid=${dealid} onclick="AddPaymentsTODeal(this, event)">update</button>
         <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
         </div>
     </form>

@@ -44,9 +44,9 @@ exports.settings = (req, res) => {
             if (!err) {
                 // res.send( result)
                 res.status(200).render('../views/admin/settings.ejs', { data: result })
-             } else {
+            } else {
                 res.status(500).send({ status: false, msg: "Internal error occurs!" });
-             }
+            }
         })
     }
 }
@@ -64,14 +64,15 @@ exports.expense = (req, res) => {
 //INVENTORY
 exports.inventory = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT * FROM material_used`
+        const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name,deals.np_deadline FROM material_used JOIN deals on deals.id =material_used.ndeal_id GROUP BY deals.id;
+        SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name ,deals.np_deadline FROM material_left JOIN deals on deals.id =material_left.ndeal_id GROUP BY deals.id ;`
         db.query(query, (err, result, field) => {
             if (!err) {
-                // res.send( result)
+                // res.send(result)
                 res.status(200).render('../views/admin/inventory.ejs', { data: result })
-             } else {
+            } else {
                 res.status(500).send({ status: false, msg: "Internal error occurs!" });
-             }
+            }
         })
     }
 }
@@ -79,12 +80,27 @@ exports.inventory = (req, res) => {
 //---Finance 
 exports.renderNormalProjectFinance = async (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const q = `SELECT normal_projects_finance.fid,deals.reference_no,deals.deal_name,deals.city, deals.id,sum(normal_projects_finance.totalamount) as total_amount, sum(normal_projects_finance.amount_got) as amount_get  FROM normal_projects_finance
-        JOIN deals on normal_projects_finance.ndeal_id= deals.id GROUP by ndeal_id;`;
-        await db.query(q, (err, results) => {
-            if (!err) {
-                console.log(results);
-                res.status(200).render('../views/admin/project.finance.ejs', { data: results })
+        let s = `SELECT deals.id,deals.reference_no,deals.deal_name,deals.city,normal_projects_finance.ndeal_id,normal_projects_finance.totalamount,normal_projects_finance.amount_got,normal_projects_finance.modeofpay,normal_projects_finance.dateofpay FROM normal_projects_finance JOIN deals on normal_projects_finance.ndeal_id= deals.id `;
+        await db.query(s, (err, results) => {
+            if (!err) {let newObj = {};
+                (results).forEach(e => {
+                    if (!newObj.hasOwnProperty(e.id)) {
+                        newObj[e.id] = {id: e.id,ref: e.reference_no,
+                            title: e.deal_name,location: e.city,
+                            total_amount: e.totalamount,}}})
+                const MainObject = Object.values(newObj);
+                const id_map = new Map();
+                MainObject.forEach(obj => id_map.set(obj.id, obj));
+                let matchingObj = [];
+                (results).forEach(obj => {
+                    matchingObj = id_map.get(obj.ndeal_id);
+                    if (matchingObj) {
+                        if (!matchingObj.payments) {matchingObj.payments = [];}
+                        matchingObj.payments.push({
+                            id: obj.ndeal_id,amount_got: obj.amount_got,
+                            modeofpay: obj.modeofpay,dateofpay: obj.dateofpay});
+                    }});
+                res.status(200).render('../views/admin/project.finance.ejs', { data: MainObject })
             } else {
                 res.status(500).send({ msg: "something error occured" })
             }
@@ -100,7 +116,7 @@ exports.renderNormalProjectForm = async (req, res) => {
 
 //---Normal project form works-------
 exports.insertNewNormalDeal = async (req, res) => {
-    // if (req.session.isLoggedIn == true && req.session.role == 'admin') {
+    if (req.session.isLoggedIn == true && req.session.role == 'admin') {
     db.getConnection((err0, conn) => {
         if (err0) throw err0;
         conn.beginTransaction(function (err) {
@@ -165,5 +181,5 @@ exports.insertNewNormalDeal = async (req, res) => {
     })
 
 
-    // }
+    }
 }

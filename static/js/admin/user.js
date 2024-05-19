@@ -5,7 +5,6 @@ function Disable_BtnHandler(e, ep) {
         let inputs = elmCtn.getElementsByTagName('input')
         for (const e of inputs) { e.removeAttribute('disabled') }
         elmCtn.getElementsByTagName('Button')[0].classList.remove('hide')
-
     } else {
         let elmCtn = document.querySelector(e)
         let inputs = elmCtn.getElementsByTagName('input')

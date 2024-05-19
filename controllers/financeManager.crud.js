@@ -12,16 +12,18 @@ exports.getIncom_Exp_total = async (req, res) => {
   })
 }
 
+
 //----------normal project finace----------------
 
 exports.addAmountRecieved = async (req, res) => {
+  console.log(req.body);
   const q = `INSERT INTO normal_projects_finance (ndeal_id, amount_got, dateofpay, modeofpay) VALUES (?, ?, ?, ?)`
   await dbcon.query(q, [req.body.ndeal_id, req.body.amount_got, req.body.dateofpay, req.body.modeofpay], (err, result) => {
     if (err) {
       console.log(err);
-      return res.status(500).send("some error occurred!..");  
+      return res.status(500).send({status:false,mag:"some error occurred!.."});  
     }
-    res.status(200).send({ msg: "added successfully" })
+    res.status(200).send({msg:"Added Sucessfully"});  
   })
 }
 

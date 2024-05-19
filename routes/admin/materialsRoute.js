@@ -15,8 +15,8 @@ materialRouter.put('/update-material-from-project', materialController.updateMat
 materialRouter.post('/add-material-to-leftstock', materialController.addMatrialsToLeftStock);
 materialRouter.get('/get-material-from-leftstock', materialController.getMatrialsFromLeftStock);
 
-// material list routes
 
+// material list routes
 materialRouter.post('/add-material-to-list', materialController.addMatrialsToList);
 materialRouter.get('/get-material-from-list', materialController.getMatrialsFromList);
 

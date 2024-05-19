@@ -2,10 +2,10 @@ const db = require('../config/db.config');
 
 
 exports.getProjectNameThroughRef = async (req, res)=> {
-   const query = `select deal_name, work_name from deals where reference_no = ?`
+   const query = `select deal_name, work_name from deals where id = ?`
    await db.query(query, [req.query.ref], (err, results) => {
       if (!err) {
-         res.status(200).send(results)
+         res.status(200).send({status:true,msg:'retrived!',data:results})
       } else {
          res.status(500).send({ msg: "Internal error occurs!" });
       }
@@ -18,7 +18,7 @@ exports.getAllRef = async (req, res)=> {
    const query = `select reference_no, id from deals`
    await db.query(query, [req.query.ref], (err, results) => {
       if (!err) {
-         res.status(200).send(results)
+         res.status(200).send({status:true,msg:'retrived',data:results})
       } else {
          res.status(500).send({ msg: "Internal error occurs!" });
       }
@@ -47,12 +47,11 @@ exports.getMatrialsToProject = async (req, res) => {
    const q = "select * from material_used where ndeal_id = ?"
    await db.query(q, [req.query.pid], (err, results) => {
       if (!err) {
-         res.status(200).send(results)
+         res.status(200).send({status:true,msg:'Successfully rtrived data',data:results})
       } else {
          res.status(500).send({ msg: "Internal error occurs!" });
       }
-   })
-}
+   })}
 
 
 exports.updateMatrialsToProject = async (req, res) => {
@@ -69,7 +68,6 @@ exports.updateMatrialsToProject = async (req, res) => {
 
 
 // left in project
-
 exports.addMatrialsToLeftStock = async (req, res) => {
    const data = []
    req.body && req.body.items.forEach(elem => {
@@ -80,7 +78,7 @@ exports.addMatrialsToLeftStock = async (req, res) => {
       if (!err) {
          res.status(200).send({ msg: 'Materials inserted to left successfully!' })
       } else {
-         res.status(500).send({ msg: "Internal error occurs!" });
+         res.status(500).send({ msg: "Internal error occurs!" +err});
       }
    })
 }
@@ -89,7 +87,7 @@ exports.getMatrialsFromLeftStock = async (req, res) => {
    const q = "select * from material_left where ndeal_id = ?"
    await db.query(q, [req.query.pid], (err, results) => {
       if (!err) {
-         res.status(200).send(results)
+         res.status(200).send({status:true,msg:'Successfully rtrived data',data:results})
       } else {
          res.status(500).send({ msg: "Internal error occurs!" });
       }

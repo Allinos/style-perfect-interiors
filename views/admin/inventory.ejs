@@ -31,8 +31,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="sliders-v-alt" class="svg"><path fill="" d="M20,8.18V3a1,1,0,0,0-2,0V8.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V13.82a3,3,0,0,0,0-5.64ZM19,12a1,1,0,1,1,1-1A1,1,0,0,1,19,12Zm-6,2.18V3a1,1,0,0,0-2,0V14.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V19.82a3,3,0,0,0,0-5.64ZM12,18a1,1,0,1,1,1-1A1,1,0,0,1,12,18ZM6,6.18V3A1,1,0,0,0,4,3V6.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V11.82A3,3,0,0,0,6,6.18ZM5,10A1,1,0,1,1,6,9,1,1,0,0,1,5,10Z"></path></svg>
                         </span>
                         <div class="filter-options hide">
-                            <p class="uppercase">Consumables</p>
-                            <p class="uppercase">Leftovers</p>
+                            <p class="uppercase" onclick="showInventoryCtn('userInventoryCtn',this)">Consumables</p>
+                            <p class="uppercase" onclick="showInventoryCtn('leftInventoryCtn',this)">Leftovers</p>
                         </div>
                     </div>
                     <div class="addItem">
@@ -51,33 +51,30 @@
                     </div>
                 </div>
             </div>
-            <div class="inventory-container">
+            <div class="inventory-container" id="userInventoryCtn">
+                <% data[0]?.forEach((e)=>{ %>
                 <div class="inventory-item flex">
                     <div class="inventory-details">
                         <p class="inName uppercase">Ref No.</p>
-                        <p class="inData">01/F/6C</p>
+                        <p class="inData"><%= e.reference_no %></p>
                     </div>
                     <div class="inventory-details">
                         <p class="inName uppercase">Project name</p>
-                        <p class="inData">Commercial Residential Complex City</p>
+                        <p class="inData"><%= e.work_name %></p>
                     </div>
                     <div class="inventory-details">
                         <p class="inName uppercase">Particulars</p>
-                        <p class="inData">Bricks/Cement/Concrete</p>
+                        <p class="inData"><%= e.deal_name %></p>
                     </div>
                     <div class="inventory-details">
-                        <p class="inName uppercase">Quantity</p>
-                        <p class="inData">1KG</p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Amount</p>
-                        <p class="inData">&#8377;<span>10,000</span></p>
+                        <p class="inName uppercase">Location</p>
+                        <p class="inData"><%= e.city %></p>
                     </div>
                     <div class="inventory-details">
                         <p class="inName uppercase">Total</p>
-                        <p class="inData">&#8377;<span>50,000</span></p>
+                        <p class="inData">&#8377;<span><%= e.np_deadline?e.np_deadline:'N/A' %></span></p>
                     </div>
-                    <div class="inventory-details" onclick="showInventory()">
+                    <div class="inventory-details" onclick="showInventory(<%= e.id %>,'userInventoryCtn',this)">
                         <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                 id="angle-double-right" class="svg">
                                 <path fill="##000000"
@@ -86,8 +83,43 @@
                             </svg></p>
                     </div>
                 </div>
+                <% }) %>
             </div>
 
+            <div class="inventory-container" id="leftInventoryCtn">
+                <% data[1]?.forEach((e)=>{ %>
+                <div class="inventory-item flex">
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Ref No.</p>
+                        <p class="inData"><%= e.reference_no %></p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Project name</p>
+                        <p class="inData"><%= e.work_name %></p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Particulars</p>
+                        <p class="inData"><%= e.deal_name %></p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Location</p>
+                        <p class="inData"><%= e.city %></p>
+                    </div>
+                    <div class="inventory-details">
+                        <p class="inName uppercase">Total</p>
+                        <p class="inData">&#8377;<span><%= e.np_deadline?e.np_deadline:'N/A' %></span></p>
+                    </div>
+                    <div class="inventory-details" onclick="showInventory(<%= e.id %>,'leftInventoryCtn',this)">
+                        <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                id="angle-double-right" class="svg">
+                                <path fill="##000000"
+                                    d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
+                                </path>
+                            </svg></p>
+                    </div>
+                </div>
+                <% })%>
+            </div>
             <div class="data-info">
                 <%- include('../partials/pagin.ejs') %>
             </div>
@@ -95,18 +127,15 @@
             <!-- --DROPDOWN-- -->
             <div class="inventoryList one">
                 <div class="inventoryList-details two">
-                    <form action="">
+                    <form action="" id="inserterForm">
                         <div class="inStock hide">
                             <p class="uppercase">Style Perfect Interior (Inventory)</p>
                         </div>
                         <!-- ---SELECT A PROJECT--  -->
                         <div class="ref-list flex">
                             <label for="">Select Ref No.</label>
-                            <select name="" id="refNo" onchange="proceedDiv()">
+                            <select name="ref" id="refNo" onchange="proceedDiv(this.value)">
                                 <option value="" disabled>Select Ref No.</option>
-                                <option value="">01/f12</option>
-                                <option value="">01/93/cc</option>
-                                <option value="">01/93/dr</option>
                             </select>
                         </div>
 
@@ -121,20 +150,17 @@
                             <div class="inv-particular flex common"><!-- Append ANOTHER ITEM -->
                                 <div class="field">
                                     <label for="" class="uppercase">Particulars</label>
-                                    <select name="" id="" onchange="">
-                                        <option value="">Bricks</option>
-                                        <option value="">Cement</option>
-                                        <option value="">Fevicol</option>
-                                        <option value="">Tiles</option>
+                                    <select name="particulars" id="particulars">
+                                        <option value="_">Select</option>
                                     </select>
                                 </div>
                                 <div class="field">
                                     <label for="" class="uppercase">Quantity</label>
-                                    <input type="text" name="quantity" id="">
+                                    <input type="text" name="quantity" id="quantity">
                                 </div>
                                 <div class="field">
                                     <label for="" class="uppercase">Amount(In Rs)</label>
-                                    <input type="text" name="amount" id="">
+                                    <input type="text" name="amount" id="amount">
                                 </div>
                                 <!-- --------------  -->
                             </div>
@@ -177,7 +203,7 @@
                             </button>
                         </div>
                         <div class="inventory-btn flex">
-                            <button class="uppercase" type="submit" onclick="">update</button>
+                            <button class="uppercase" type="submit" onclick="addInventoryItem(event)">update</button>
                             <button class="uppercase" type="reset" onclick="closeInventoryExpense()">cancel</button>
                         </div>
                     </form>
@@ -210,40 +236,12 @@
                                 <th class="uppercase">amount</th>
                             </tr>
                         </thead>
+                        <tbody id="tableData">
+                        </tbody>
                         <tbody>
                             <tr class="tableData">
-                                <td>1</td>
-                                <td>Bricks</td>
-                                <td>1000 Nos.</td>
-                                <td>&#8377;<span>50,000</span></td>
-                            </tr>
-                            <tr class="tableData">
-                                <td>1</td>
-                                <td>Bricks</td>
-                                <td>1000 Nos.</td>
-                                <td>&#8377;<span>50,000</span></td>
-                            </tr>
-                            <tr class="tableData">
-                                <td>1</td>
-                                <td>Bricks</td>
-                                <td>1000 Nos.</td>
-                                <td>&#8377;<span>50,000</span></td>
-                            </tr>
-                            <tr class="tableData">
-                                <td>1</td>
-                                <td>Bricks</td>
-                                <td>1000 Nos.</td>
-                                <td>&#8377;<span>50,000</span></td>
-                            </tr>
-                            <tr class="tableData">
-                                <td>1</td>
-                                <td>Bricks</td>
-                                <td>1000 Nos.</td>
-                                <td>&#8377;<span>50,000</span></td>
-                            </tr>
-                            <tr class="tableData">
                                 <td class="uppercase">Total</td>
-                                <td>&#8377; <span>50,000</span></td>
+                                <td>&#8377; <span id="totalAmount">50,000</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -255,7 +253,6 @@
         <!-- JAVASCRIPT -->
         <script src="../../js/admin/header.js"></script>
         <script src="/js/admin/common.js"></script>
-        <script src="/js/admin/user.js"></script>
         <script src="/js/admin/inventory.js"></script>
 </body>
 
