@@ -6,6 +6,9 @@ http://localhost:3000/apiv1/get-pname-from-ref?ref=101
 ### Api for getting project data to inventory - GET
 http://localhost:3000/apiv1/get-all-ref
 
+<!-- Materials list routes--- -->
+
+
 
 ### Api for adding materials name - POST
 http://localhost:3000/apiv1/add-material-to-list
@@ -16,6 +19,11 @@ http://localhost:3000/apiv1/add-material-to-list
 
 ### Api for getting materials name - POST
 http://localhost:3000/apiv1/get-material-from-list
+
+
+
+### Api for deleting materials name - DELETE
+http://localhost:3000/apiv1/remove-material-from-list?mnid=1
 
 
 <!-- Inventory to project  -->
@@ -47,6 +55,10 @@ http://localhost:3000/apiv1/update-material-from-project
 } -->
 
 
+### Api for deleting materials from each projects - DELETE
+http://localhost:3000/apiv1/delete-material-from-project?muid=8&pid=1
+
+
 
 
 <!-- Left Stock -->
@@ -65,6 +77,22 @@ http://localhost:3000/apiv1/add-material-to-leftstock
 
 ### Api for getting materials from left stock - GET
 http://localhost:3000/apiv1/get-material-from-leftstock?pid=1
+
+
+
+### Api for updating materials in left stock - PUT
+http://localhost:3000/api1/update-material-to-leftstock
+<!-- {
+  "pid": 1,
+  "materialid": 2,
+  "item": "sand",
+  "qnt": "20 balti",
+  "amount": 500
+} -->
+
+
+### Api for deleting materials in left stock - DELETE
+http://localhost:3000/apiv1/remove-material-from-leftstock?mlid=1&pid=1
 
 
 

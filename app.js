@@ -56,7 +56,7 @@ app.use('/admin/user-manager', userManager)
 app.use('/admin/settings', settings)
 app.use('/admin/finance', finance)
 app.use('/admin/finance/expenses', financeExpense)
-app.use('/admin/inventory', materialRouter)
+app.use('/apiv1', materialRouter) // bro if you want to make changes here then you should update all the urls in style_api.md file...
 
 // app.use('/apiV1', tasks)
 app.use('/apiv1', apiRoute)
