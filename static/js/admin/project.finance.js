@@ -3,7 +3,7 @@ const getFun = new DataCall()
 async function AddPaymentsTODeal(data, e) {
     e.preventDefault();
     const target = data.dataset
-    console.log(target, data,e);
+    console.log(target, data, e);
     const advanceData = new FormData(document.getElementById('advanced-form'));
     advanceData.append('ndeal_id', Number(target.dealid));
     await getFun.GET_POST('admin/finance/add-payments', 'POST', advanceData, 'form')
@@ -45,32 +45,39 @@ async function openDick(data) {
 }
 
 
-async function openEdit() {
+async function openEdit(e, o) {
     document.getElementsByClassName('main')[0].classList.add('flow')
-    // const { dealid } = data.dealid
+    let mainCtn = e.parentElement.parentElement;
+    let amount = mainCtn.querySelector('.amount');
+    let date = mainCtn.querySelector('.date');
+    let mode = mainCtn.querySelector('.mode');
     const maindropDown = document.querySelector(`.main-dropdown`);
     maindropDown.style.display = `block`;
     maindropDown.innerHTML = ""
     maindropDown.innerHTML = `<div class="advance_dropdown common_dropdown">
     <div class="field">
-        <p class="uppercase">Installment No.</p>
-        <p class="uppercase">1</p>
+        <p class="uppercase">f/p/id:</p>
+        <p class="uppercase">${o}</p>
     </div>
     <div class="flex">
         <div class="field">
         <label for="" class="uppercase">Amount</label>
-            <input type="text" name="" id="">
+            <input type="text" name="amount" id="amount" value='${amount.innerText}'>
         </div>
         <div class="field">
         <label for="" class="uppercase">Date</label>
-            <input type="text" name="" id="">
+            <input type="text" name="date" id="date" value='${date.innerText}'>
+        </div>
+        <div class="field">
+        <label for="" class="uppercase">Mode of Payment</label>
+            <input type="text" name="mode" id="mode" value='${mode.innerText}'>
         </div>
     </div>
     <div class = "drop-btn flex">
-        <button type="button" class="uppercase" ">update</button>
+        <button type="button" class="uppercase" onclick="UpdatePayments(this,${o})">update</button>
         <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
         </div>
-</div>`
+</div>`;
 
 }
 (function GetIncExp() {
@@ -86,6 +93,14 @@ async function openEdit() {
 
 function CloseModel(e) {
     document.querySelector(e).style.display = 'none'
+}
+async function UpdatePayments(e, o) {
+    let mainCtn = e.parentElement.parentElement;
+    let amount = mainCtn.querySelector('#amount').value;
+    let date = mainCtn.querySelector('#date').value;
+    let mode = mainCtn.querySelector('#mode').value;
+    let dataBody = { amount_got: amount, dateofpay: date, modeofpay: mode, fid: o }
+    await getFun.GET_POST('admin/finance/update-payments', 'PUT', dataBody, 'form')
 }
 function search() {
     var inpValue = document.getElementById('searchQuery').value.toLowerCase();

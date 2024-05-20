@@ -27,8 +27,9 @@ exports.addAmountRecieved = async (req, res) => {
 }
 
 exports.updateAmountRecieved = async (req, res) => {
-  const updateData =  [req.body.amount_got, req.body.dateofpay, req.body.modeofpay, req.body.pid, req.body.fid]
-  const q = `UPDATE normal_projects_finance SET amount_got = ?, dateofpay = ?, modeofpay = ? WHERE ndeal_id = ? AND fid = ?`
+  console.log(req.body);
+  const updateData =  [req.body.amount_got, req.body.dateofpay, req.body.modeofpay, req.body.fid]
+  const q = `UPDATE normal_projects_finance SET amount_got = ?, dateofpay = ?, modeofpay = ? WHERE fid = ?`
   await dbcon.query(q, updateData, (err, result) => {
     if (err) {
       return res.status(500).send({msg:"some error occurred!.."});  

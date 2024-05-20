@@ -47,18 +47,18 @@
             <div class="installment flex">
                 <div class="field">
                     <p class="uppercase">amount</p>
-                    <p> <%= e.amount_got %></p>
+                    <p class="amount"> <%= e.amount_got %></p>
                 </div>
                 <div class="field">
                     <p class="uppercase">Date</p>
-                    <p> <%= e.dateofpay %></p>
+                    <p class="date"> <%= e.dateofpay %></p>
                 </div>
                 <div class="field">
                     <p class="uppercase">Mode</p>
-                    <p> <%= e.modeofpay %></p>
+                    <p class="mode"> <%= e.modeofpay %></p>
                 </div>
                 <div class="field">
-                    <button onclick="openEdit()">Edit</button>
+                    <button onclick="openEdit(this,<%= e.fid %>)">Edit</button>
                 </div>
             </div>
             <% }) %>

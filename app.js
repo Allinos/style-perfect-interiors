@@ -37,7 +37,7 @@ const apiRoute = require('./routes/admin/projectRoute.js');
 // const EmpNitify = require('./routes/employee/notificationRoute');
 // const EmpPmRoute = require('./routes/employee/pm.emproute.js');
 
-// CA
+// // CA
 // const caAuth = require('./routes/CA/auth');
 // const caMainRoute = require('./routes/CA/indexRoutes');
 
@@ -56,7 +56,7 @@ app.use('/admin/user-manager', userManager)
 app.use('/admin/settings', settings)
 app.use('/admin/finance', finance)
 app.use('/admin/finance/expenses', financeExpense)
-app.use('/apiv1', materialRouter) // bro if you want to make changes here then you should update all the urls in style_api.md file...
+app.use('/admin/inventory', materialRouter) //fuck
 
 // app.use('/apiV1', tasks)
 app.use('/apiv1', apiRoute)
