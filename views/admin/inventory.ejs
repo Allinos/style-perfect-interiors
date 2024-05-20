@@ -22,13 +22,23 @@
 
     <%- include('../partials/admin.header.ejs') %>
         <!-- MAIN SECTION STARTS HERE  -->
-        <main class="main" data-app-page="inventory">
+        <main class="main box" data-app-page="inventory">
             <div class="userContainer uform">
                 <h4 class="uppercase">inventory</h4>
                 <div class="side-btn flex">
                     <div class="filter">
+                        <span class="btn" onclick="(location.reload())"><svg height="25px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28,16c-1.219,0-1.797,0.859-2,1.766C25.269,21.03,22.167,26,16,26c-5.523,0-10-4.478-10-10S10.477,6,16,6  c2.24,0,4.295,0.753,5.96,2H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h6c1.104,0,2-0.896,2-2V4c0-1.104-0.896-2-2-2s-2,0.896-2,2v0.518  C21.733,2.932,18.977,2,16,2C8.268,2,2,8.268,2,16s6.268,14,14,14c9.979,0,14-9.5,14-11.875C30,16.672,28.938,16,28,16z" /></svg> 
+                        </span>
+                    </div>
+
+                    <div class="filter">
                         <span class="btn" onclick="options()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="sliders-v-alt" class="svg"><path fill="" d="M20,8.18V3a1,1,0,0,0-2,0V8.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V13.82a3,3,0,0,0,0-5.64ZM19,12a1,1,0,1,1,1-1A1,1,0,0,1,19,12Zm-6,2.18V3a1,1,0,0,0-2,0V14.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V19.82a3,3,0,0,0,0-5.64ZM12,18a1,1,0,1,1,1-1A1,1,0,0,1,12,18ZM6,6.18V3A1,1,0,0,0,4,3V6.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V11.82A3,3,0,0,0,6,6.18ZM5,10A1,1,0,1,1,6,9,1,1,0,0,1,5,10Z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="sliders-v-alt" class="svg">
+                                <path fill=""
+                                    d="M20,8.18V3a1,1,0,0,0-2,0V8.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V13.82a3,3,0,0,0,0-5.64ZM19,12a1,1,0,1,1,1-1A1,1,0,0,1,19,12Zm-6,2.18V3a1,1,0,0,0-2,0V14.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V19.82a3,3,0,0,0,0-5.64ZM12,18a1,1,0,1,1,1-1A1,1,0,0,1,12,18ZM6,6.18V3A1,1,0,0,0,4,3V6.18a3,3,0,0,0,0,5.64V21a1,1,0,0,0,2,0V11.82A3,3,0,0,0,6,6.18ZM5,10A1,1,0,1,1,6,9,1,1,0,0,1,5,10Z">
+                                </path>
+                            </svg>
                         </span>
                         <div class="filter-options hide">
                             <p class="uppercase" onclick="showInventoryCtn('userInventoryCtn',this)">Consumables</p>
@@ -53,72 +63,92 @@
             </div>
             <div class="inventory-container" id="userInventoryCtn">
                 <% data[0]?.forEach((e)=>{ %>
-                <div class="inventory-item flex">
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Ref No.</p>
-                        <p class="inData"><%= e.reference_no %></p>
+                    <div class="inventory-item flex">
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Ref No.</p>
+                            <p class="inData">
+                                <%= e.reference_no %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Project name</p>
+                            <p class="inData">
+                                <%= e.work_name %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Particulars</p>
+                            <p class="inData">
+                                <%= e.deal_name %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Location</p>
+                            <p class="inData">
+                                <%= e.city %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Total</p>
+                            <p class="inData">&#8377;<span>
+                                    <%= e.np_deadline?e.np_deadline:'N/A' %>
+                                </span></p>
+                        </div>
+                        <div class="inventory-details" onclick="showInventory(<%= e.id %>,'userInventoryCtn',this)">
+                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    id="angle-double-right" class="svg">
+                                    <path fill="##000000"
+                                        d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
+                                    </path>
+                                </svg></p>
+                        </div>
                     </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Project name</p>
-                        <p class="inData"><%= e.work_name %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Particulars</p>
-                        <p class="inData"><%= e.deal_name %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Location</p>
-                        <p class="inData"><%= e.city %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Total</p>
-                        <p class="inData">&#8377;<span><%= e.np_deadline?e.np_deadline:'N/A' %></span></p>
-                    </div>
-                    <div class="inventory-details" onclick="showInventory(<%= e.id %>,'userInventoryCtn',this)">
-                        <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                id="angle-double-right" class="svg">
-                                <path fill="##000000"
-                                    d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
-                                </path>
-                            </svg></p>
-                    </div>
-                </div>
-                <% }) %>
+                    <% }) %>
             </div>
 
             <div class="inventory-container" id="leftInventoryCtn">
                 <% data[1]?.forEach((e)=>{ %>
-                <div class="inventory-item flex">
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Ref No.</p>
-                        <p class="inData"><%= e.reference_no %></p>
+                    <div class="inventory-item flex">
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Ref No.</p>
+                            <p class="inData">
+                                <%= e.reference_no %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Project name</p>
+                            <p class="inData">
+                                <%= e.work_name %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Particulars</p>
+                            <p class="inData">
+                                <%= e.deal_name %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Location</p>
+                            <p class="inData">
+                                <%= e.city %>
+                            </p>
+                        </div>
+                        <div class="inventory-details">
+                            <p class="inName uppercase">Total</p>
+                            <p class="inData">&#8377;<span>
+                                    <%= e.np_deadline?e.np_deadline:'N/A' %>
+                                </span></p>
+                        </div>
+                        <div class="inventory-details" onclick="showInventory(<%= e.id %>,'leftInventoryCtn',this)">
+                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    id="angle-double-right" class="svg">
+                                    <path fill="##000000"
+                                        d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
+                                    </path>
+                                </svg></p>
+                        </div>
                     </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Project name</p>
-                        <p class="inData"><%= e.work_name %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Particulars</p>
-                        <p class="inData"><%= e.deal_name %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Location</p>
-                        <p class="inData"><%= e.city %></p>
-                    </div>
-                    <div class="inventory-details">
-                        <p class="inName uppercase">Total</p>
-                        <p class="inData">&#8377;<span><%= e.np_deadline?e.np_deadline:'N/A' %></span></p>
-                    </div>
-                    <div class="inventory-details" onclick="showInventory(<%= e.id %>,'leftInventoryCtn',this)">
-                        <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                id="angle-double-right" class="svg">
-                                <path fill="##000000"
-                                    d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
-                                </path>
-                            </svg></p>
-                    </div>
-                </div>
-                <% })%>
+                    <% })%>
             </div>
             <div class="data-info">
                 <%- include('../partials/pagin.ejs') %>
@@ -166,7 +196,7 @@
                             </div>
                             <!-- ----------------------------  -->
                             <!-- <div class="inv-particular flex custom">Append custom ITEM -->
-                                <!-- <div class="field">
+                            <!-- <div class="field">
                                     <label for="" class="uppercase">Particulars</label>
                                     <input type="text" name="particulars" id="">
                                 </div>
@@ -178,7 +208,7 @@
                                     <label for="" class="uppercase">Amount(In Rs)</label>
                                     <input type="text" name="amount" id="">
                                 </div> -->
-                                <!-- --------------  -->
+                            <!-- --------------  -->
                             <!-- </div> -->
                         </div>
                         <!-- -----------  -->
@@ -209,14 +239,19 @@
                     </form>
                 </div>
 
-                
+
             </div>
 
             <!-- --INVENTORY LISTS-- -->
             <div class="inventoryList-popup one">
                 <!-- --PARTICULARS DETAILS-- -->
                 <div class="particularDetails two">
-                    <p class="pussy" onclick="closeInventory()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="times" class="svg"><path fill="" d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path></svg></p>
+                    <p class="pussy" onclick="closeInventory()"><svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" id="times" class="svg">
+                            <path fill=""
+                                d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
+                            </path>
+                        </svg></p>
                     <div class="particularData flex">
                         <div class="project-refr">
                             <p class="inName uppercase">Ref No.</p>

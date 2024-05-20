@@ -155,5 +155,8 @@ async function UpdateNotify(act, e) {
     })
 }
 CheckNotification()
+function fullScreen() {
+    document.querySelector('.box').classList.toggle('fullscreen');
+}
 
 

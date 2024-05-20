@@ -1,9 +1,6 @@
-// function AlertNotifier(status, msg, icon) {
-//     Swal.fire({ title: status ? 'Sucess' : 'Error', text: msg, icon: icon, confirmButtonText: 'Done' });
-// }
 // ReqHandler Data  
 BASE_URL = (location.origin + '/admin/inventory');
-let ReqURI = { getUsedInventoryById: BASE_URL + `/get-material-from-project?pid=`, getLeftInventoryById: BASE_URL + `/get-material-from-leftstock?pid=`, getAllRef: BASE_URL + '/get-all-ref', getRefByDetails: BASE_URL + '/get-pname-from-ref?ref=', addStockTo: { used: BASE_URL + '/add-material-to-project', left: BASE_URL + '/add-material-to-leftstock' },getAllmeterials:BASE_URL+'/get-material-from-list' }
+let ReqURI = { getUsedInventoryById: BASE_URL + `/get-material-from-project?pid=`, getLeftInventoryById: BASE_URL + `/get-material-from-leftstock?pid=`, getAllRef: BASE_URL + '/get-all-ref', getRefByDetails: BASE_URL + '/get-pname-from-ref?ref=', addStockTo: { used: BASE_URL + '/add-material-to-project', left: BASE_URL + '/add-material-to-leftstock' }, getAllmeterials: BASE_URL + '/get-material-from-list' }
 
 
 
@@ -78,8 +75,8 @@ function addField() {
     <label for="" class="uppercase">Amount(In Rs)</label>
     <input type="text" name="amount" id="amount">
 </div>`;
-  let newCtn = particularItem.parentNode.appendChild(newItem);
-   newCtn.querySelector('#particulars').innerHTML=particularInnerCnt;
+    let newCtn = particularItem.parentNode.appendChild(newItem);
+    newCtn.querySelector('#particulars').innerHTML = particularInnerCnt;
 }
 
 function addCustomField() {
@@ -105,9 +102,11 @@ function addCustomField() {
 (async function getAllmeterials(params) {
     let particularInnerCnt = document.querySelector(`#particulars`);
     ReqHandler.GET(ReqURI.getAllmeterials).then((res) => {
-      res.forEach(e=>{
-          particularInnerCnt.innerHTML+=`<option value="${e.material_name}">${e.material_name}</option>`
-      })})})()
+        res.forEach(e => {
+            particularInnerCnt.innerHTML += `<option value="${e.material_name}">${e.material_name}</option>`
+        })
+    })
+})()
 
 function showInventory(e, o, c) {
     let check = (o == 'userInventoryCtn');
@@ -147,6 +146,7 @@ function opener() {
 }
 function addInventoryItem(e) {
     e.preventDefault();
+    document.getElementById('loading-container').classList.remove('hide')
     let checker = (inventoryType.used)
     let dataCtn = document.querySelectorAll('.inv-particular')
     let bodyData = {}; bodyData.items = [];
@@ -161,6 +161,11 @@ function addInventoryItem(e) {
     })
     ReqHandler.POST(checker ? ReqURI.addStockTo.used : ReqURI.addStockTo.left, bodyData)
         .then((res) => {
-        })
-
-}
+            if (res.status) {
+                document.getElementById('loading-container').classList.add('hide')
+                AlertNotify('Sucess', res.msg, 'success');
+            }else{
+                document.getElementById('loading-container').classList.add('hide')
+                AlertNotify('Error!', "unable to retrive data", 'error');
+            }})
+        }

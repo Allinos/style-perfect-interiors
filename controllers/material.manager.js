@@ -36,9 +36,9 @@ exports.addMatrialsToProject = async (req, res) => {
    const q = "INSERT INTO material_used (ndeal_id, material_name, quantity, price) VALUES ?"
    await db.query(q, [data], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: 'Materials inserted successfully!' })
+         res.status(200).send({status:true, msg: 'Materials inserted to left successfully!' })
       } else {
-         res.status(500).send({ msg: "Internal error occurs!" });
+         res.status(500).send({ status:false, msg: 'Faild to Materials inserte! --' +err});
       }
    })
 }
@@ -76,9 +76,9 @@ exports.addMatrialsToLeftStock = async (req, res) => {
    const q = "INSERT INTO material_left (ndeal_id, material_name, quantity, price) VALUES ?"
    await db.query(q, [data], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: 'Materials inserted to left successfully!' })
+         res.status(200).send({status:true, msg: 'Materials inserted to left successfully!' })
       } else {
-         res.status(500).send({ msg: "Internal error occurs!" +err});
+         res.status(500).send({ status:false, msg: 'Faild to Materials inserte! --' +err});
       }
    })
 }
