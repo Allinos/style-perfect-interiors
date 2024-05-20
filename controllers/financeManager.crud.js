@@ -16,7 +16,6 @@ exports.getIncom_Exp_total = async (req, res) => {
 //----------normal project finace----------------
 
 exports.addAmountRecieved = async (req, res) => {
-  console.log(req.body);
   const q = `INSERT INTO normal_projects_finance (ndeal_id, amount_got, dateofpay, modeofpay) VALUES (?, ?, ?, ?)`
   await dbcon.query(q, [req.body.ndeal_id, req.body.amount_got, req.body.dateofpay, req.body.modeofpay], (err, result) => {
     if (err) {
@@ -24,6 +23,29 @@ exports.addAmountRecieved = async (req, res) => {
       return res.status(500).send({status:false,mag:"some error occurred!.."});  
     }
     res.status(200).send({msg:"Added Sucessfully"});  
+  })
+}
+
+exports.updateAmountRecieved = async (req, res) => {
+  const updateData =  [req.body.amount_got, req.body.dateofpay, req.body.modeofpay, req.body.pid, req.body.fid]
+  const q = `UPDATE normal_projects_finance SET amount_got = ?, dateofpay = ?, modeofpay = ? WHERE ndeal_id = ? AND fid = ?`
+  await dbcon.query(q, updateData, (err, result) => {
+    if (err) {
+      return res.status(500).send({msg:"some error occurred!.."});  
+    }
+    return res.status(200).send({msg:"Amount Updated Sucessfully"});
+  })
+}
+
+
+exports.deleteAmountRecieved = async (req, res) => {
+  const deleteInfo =  [req.query.pid, req.query.fid]
+  const q = `DELETE FROM normal_projects_finance WHERE ndeal_id = ? AND fid = ?`
+  await dbcon.query(q, deleteInfo, (err, result) => {
+    if (err) {
+      return res.status(500).send({msg:"some error occurred!.."});  
+    }
+    return res.status(200).send({msg:"Amount deleted Sucessfully"});
   })
 }
 

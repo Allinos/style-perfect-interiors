@@ -110,6 +110,23 @@ http://localhost:3000/admin/finance/add-payments
 } -->
 
 
+
+### Api for updating finance - PUT
+http://localhost:3000/admin/finance/update-payments
+<!-- {
+  "pid": 2,
+  "fid": 4,
+  "amount_got": 2001,
+  "dateofpay": "2/2/2",
+  "modeofpay": "online"
+} -->
+
+
+
+### Api for deleting finance - DELETE
+http://localhost:3000/admin/finance/delete-payments?pid=2&fid=4
+
+
 <!-- Employee new routes -->
 
 
