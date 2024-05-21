@@ -18,9 +18,7 @@ exports.indexDeshboard = async (req, res) => {
                 })
                 for (const key in grouped) { dataUnity(grouped[key]) }
                 for (const key in grouped) { sentData.push(grouped[key][0]) }
-                // res.status(200).send({data : sentData});
                 const sortedData = sentData.sort((a, b) => b.id - a.id);
-                // console.log(sortedData)
                 res.status(200).render('../views/admin/_index.ejs', { sortedData })
             }
         })
@@ -100,7 +98,6 @@ exports.renderNormalProjectFinance = async (req, res) => {
                             id: obj.ndeal_id,fid:obj.fid,amount_got: obj.amount_got,
                             modeofpay: obj.modeofpay,dateofpay: obj.dateofpay});
                     }});
-                    console.log(MainObject[0].payments);
                 res.status(200).render('../views/admin/project.finance.ejs', { data: MainObject })
             } else {
                 res.status(500).send({ msg: "something error occured" })

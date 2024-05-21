@@ -75,6 +75,9 @@
         text-align: center;
         width: 100%;
     }
+    .accordion-content .action-icons{
+       justify-content: space-between;
+    }
     .accordion-content .arrow-down svg{
         fill: var(--secondary-color);
     }

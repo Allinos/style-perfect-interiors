@@ -27,10 +27,15 @@
             &#8377;<span><%= data.total_amount %></span>/-
         </p>
 
-        <p class="totalf none" onclick="openDick({dealid:<%= data.id %>})">&#8377;<span><%= totalAmountGot %></span>/-
+        <p class="totalf none " >
+            &#8377;<span><%= totalAmountGot %></span>/-
         <span class="maka">Received</span></p>
-        <p class="totalf none">&#8377;<span><%= data.total_amount - totalAmountGot %></span>/-</p>
-        <p class="arrow-down">
+        
+        <p class="totalf none">
+            &#8377;<span><%= data.total_amount - totalAmountGot %></span>/-
+        </p>
+        <p class="arrow-down action-icons">
+            <svg onclick="openDick({dealid:<%= data.id %>})" viewBox="0 0 48 48"  width="25" xmlns="http://www.w3.org/2000/svg"><path d="M38 6H10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V10c0-2.21-1.79-4-4-4zm-4 20h-8v8h-4v-8h-8v-4h8v-8h4v8h8v4z"/><path d="M0 0h48v48H0z" fill="none"/></svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-double-down"
                 class="svg">
                 <path fill="##000000"
@@ -39,6 +44,8 @@
             </svg>
         </p>
     </div>
+
+
     <!-- ----------open data for accordion---------- -->
     <div class="adata data">
         <!-- --INSTALLMENT-- -->
