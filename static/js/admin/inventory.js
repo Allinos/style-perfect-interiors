@@ -21,7 +21,7 @@ function openInventoryExpense() {
 function openStockExpense() {
     ReqHandler.GET(ReqURI.getAllRef).then(res => {
         let ctn = document.getElementById('refNo');
-        ctn.innerHTML = '';
+        ctn.innerHTML = `<option value="">Select Project</option>`;
         res.data.forEach(e => {
             ctn.innerHTML += `<option value="${e.id}">${e.reference_no}</option>`;
         })
@@ -135,7 +135,7 @@ function showInventory(e, o, c) {
 
 function closeInventory() {
     document.querySelector(`.inventoryList-popup`).classList.remove('active');
-    document.querySelector('#tableData').innerHTML = ''
+    document.querySelector('#tableData').innerHTML = '';
 }
 
 function options() {
@@ -147,8 +147,8 @@ function opener() {
 function addInventoryItem(e) {
     e.preventDefault();
     document.getElementById('loading-container').classList.remove('hide')
-    let checker = (inventoryType.used)
-    let dataCtn = document.querySelectorAll('.inv-particular')
+    let checker = (inventoryType.used);
+    let dataCtn = document.querySelectorAll('.inv-particular');
     let bodyData = {}; bodyData.items = [];
     let refId = document.getElementById('refNo').value;
     bodyData.pid = refId;
