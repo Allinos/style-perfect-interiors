@@ -13,6 +13,7 @@
 }
 .filter .btn svg{
     fill: var(--secondary-color);
+    width: 20px;
 }
 .filter .btn:hover{
     background: var(--secondary-color);
@@ -194,13 +195,17 @@
     flex-direction: column;
     margin-top: 10px;
 }
-
+.project-inv .field:nth-child(4){
+    width: auto;
+}
 .project-inv .field label {
     font-size: 12px;
     color: var(--grey);
     font-weight: 500;
 }
-
+.project-inv .field .opacity{
+    opacity: 0;
+}
 .project-inv .pro-name {
     font-weight: 600;
     font-size: 14px;
@@ -322,7 +327,7 @@
 }
 
 .itemsTable :is(th, td) {
-    padding: 12px 15px;
+    padding: 8px 12px;
 }
 
 .itemsTable tbody tr {
@@ -341,7 +346,48 @@
 .itemsTable tbody tr:last-of-type td {
     font-weight: 800;
 }
-
+.itemsTable tbody td.flex{
+    /* background: brown; */
+    justify-content: flex-start;
+}
+.itemsTable tbody td.flex span{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--animation-1);
+}
+.itemsTable tbody td.flex span:first-child{
+    background: var(--primary-bgr);
+}
+.itemsTable tbody td.flex span:first-child:hover{
+    background: var(--primary-color);
+}
+.itemsTable tbody td.flex span:first-child svg{
+    width: 15px;
+    height: 20px;
+}
+.itemsTable tbody td.flex span:first-child:hover svg{
+    fill: var(--white);
+}
+.itemsTable tbody td.flex span:last-child{
+    background: var(--ter-light-color);
+    /* width: 30px;
+    height: 30px; */
+}
+.itemsTable tbody td.flex span:last-child svg{
+    fill: var(--ter-dark-color);
+    width: 20px ;
+    height: 22px;
+}
+.itemsTable tbody td.flex span:last-child:hover{
+    background: var(--ter-dark-color);
+}
+.itemsTable tbody td.flex span:last-child:hover svg{
+    fill: var(--white);
+}
 @media (max-width: 480px) {
     .inventory-item {
         gap: 8px;

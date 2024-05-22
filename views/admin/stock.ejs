@@ -22,9 +22,9 @@
 
     <%- include('../partials/admin.header.ejs') %>
         <!-- MAIN SECTION STARTS HERE  -->
-        <main class="main box" data-app-page="inventory">
+        <main class="main box" data-app-page="stock">
             <div class="userContainer uform">
-                <h4 class="uppercase">inventory</h4>
+                <h4 class="uppercase">Stock</h4>
                 <div class="side-btn flex">
                     <div class="filter">
                         <span class="btn" onclick="(location.reload())"><svg height="25px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="25px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@
                         </div>
                     </div> -->
                     <div class="addItem">
-                        <button class="uppercase" onclick="openInventoryExpense()" id="">
+                        <button class="uppercase" onclick="openStockExpense()" id="">
                             <span>Add item</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle">
                                 <path fill="##000000"
@@ -77,7 +77,7 @@
                             </p>
                         </div>
                         <div class="inventory-details">
-                            <p class="inName uppercase">Client Name</p>
+                            <p class="inName uppercase">Particulars</p>
                             <p class="inData">
                                 <%= e.deal_name %>
                             </p>
@@ -89,13 +89,18 @@
                             </p>
                         </div>
                         <div class="inventory-details">
-                            <p class="inName uppercase">Deadline</p>
-                            <p class="inData">
+                            <p class="inName uppercase">Total</p>
+                            <p class="inData">&#8377;<span>
                                     <%= e.np_deadline?e.np_deadline:'N/A' %>
-                                </p>
+                                </span></p>
                         </div>
                         <div class="inventory-details" onclick="showInventory(<%= e.id %>,'userInventoryCtn',this)">
-                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="info" class="svg"><path fill="" d="M12,10a1,1,0,0,0-1,1v6a1,1,0,0,0,2,0V11A1,1,0,0,0,12,10Zm0-4a1.25,1.25,0,1,0,1.25,1.25A1.25,1.25,0,0,0,12,6Z"></path></svg></p>
+                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    id="angle-double-right" class="svg">
+                                    <path fill="##000000"
+                                        d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
+                                    </path>
+                                </svg></p>
                         </div>
                     </div>
                     <% }) %>
@@ -153,6 +158,9 @@
             <div class="inventoryList one">
                 <div class="inventoryList-details two">
                     <form action="" id="inserterForm">
+                        <div class="inStock hide">
+                            <p class="uppercase">Style Perfect Interior (Inventory)</p>
+                        </div>
                         <!-- ---SELECT A PROJECT--  -->
                         <div class="ref-list flex">
                             <label for="">Select Ref No.</label>
@@ -173,7 +181,7 @@
                                 <div class="field">
                                     <label for="" class="uppercase">Particulars</label>
                                     <select name="particulars" id="particulars">
-                                        <option value="_" disabled="disabled" selected="selected">Select</option>
+                                        <option value="_">Select</option>
                                     </select>
                                 </div>
                                 <div class="field">
@@ -199,10 +207,7 @@
                                 <div class="field">
                                     <label for="" class="uppercase">Amount(In Rs)</label>
                                     <input type="text" name="amount" id="">
-                                </div>
-                                <div class="field">
-                                    <span class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt" class="svg"><path fill="" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></span>
-                                </div>-->
+                                </div> -->
                             <!-- --------------  -->
                             <!-- </div> -->
                         </div>
@@ -264,7 +269,7 @@
                                 <th class="uppercase">Particulars</th>
                                 <th class="uppercase">quantity</th>
                                 <th class="uppercase">amount</th>
-                                <th class="uppercase">Action</th>
+                                <th class="uppercase">action</th>
                             </tr>
                         </thead>
                         <tbody id="tableData">
@@ -272,7 +277,7 @@
                         <tbody>
                             <tr class="tableData">
                                 <td class="uppercase">Total</td>
-                                <td>&#8377; <span id="totalAmount">0</span>/-</td>
+                                <td>&#8377; <span id="totalAmount">50,000</span></td>
                             </tr>
                         </tbody>
                     </table>
