@@ -1,7 +1,6 @@
 // ReqHandler Data  
 BASE_URL = (location.origin + '/admin/inventory');
-let ReqURI = { getUsedInventoryById: BASE_URL + `/get-material-from-project?pid=`, getLeftInventoryById: BASE_URL + `/get-material-from-leftstock?pid=`, getAllRef: BASE_URL + '/get-all-ref', getRefByDetails: BASE_URL + '/get-pname-from-ref?ref=', addStockTo: { used: BASE_URL + '/add-material-to-project', left: BASE_URL + '/add-material-to-leftstock' }, getAllmeterials: BASE_URL + '/get-material-from-list' }
-
+let ReqURI = { getUsedInventoryById: BASE_URL + `/get-material-from-project?pid=`, getLeftInventoryById: BASE_URL + `/get-material-from-leftstock?pid=`, getAllRef: BASE_URL + '/get-all-ref', getRefByDetails: BASE_URL + '/get-pname-from-ref?ref=', addStockTo: { used: BASE_URL + '/add-material-to-project', left: BASE_URL + '/add-material-to-leftstock' }, getAllmeterials: BASE_URL + '/get-material-from-list', removeParticulars: { used: BASE_URL + '/remove-material-from-project?muid=', left: BASE_URL + '/remove-material-from-leftstock?mlid=' },}
 
 
 //ADD NEW ITEMS IN INVENTORY
@@ -75,7 +74,7 @@ function addField() {
 </div>
 <div class="field">
 <label for="" class="uppercase opacity">0</label>
-<span class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt" class="svg"><path fill="" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></span>
+<span onclick="deleteField(this)" class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt" class="svg"><path fill="" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></span>
 </div>`;
     let newCtn = particularItem.parentNode.appendChild(newItem);
     newCtn.querySelector('#particulars').innerHTML = particularInnerCnt;
@@ -104,9 +103,7 @@ function addCustomField() {
     particularItem.parentNode.appendChild(newItem);
 }
 
-function deleteField(button){
-    
-}
+function deleteField(e){e.parentElement.parentElement.remove()}
 (async function getAllmeterials(params) {
     let particularInnerCnt = document.querySelector(`#particulars`);
     ReqHandler.GET(ReqURI.getAllmeterials).then((res) => {
@@ -117,8 +114,7 @@ function deleteField(button){
 })()
 
 function showInventory(e, o, c) {
-    let check = (o == 'userInventoryCtn');
-    console.log(check);
+    let check=(o=='userInventoryCtn');
     let parent = c.parentElement;
     let [ref, projectName] = [parent.querySelectorAll('.inData')[0].innerText,
     parent.querySelectorAll('.inData')[1].innerText]
@@ -133,12 +129,10 @@ function showInventory(e, o, c) {
                 let id = 0, total_price = 0;
                 res.data.forEach(e => {
                     total_price += e.price;
-                    let html = `<tr class="tableData"><td>${++id}</td><td>${e.material_name}</td><td>${e.quantity}</td><td>&#8377;<span>${e.price}</span></td>
-                    <td class="flex"><span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen" class="svg"><path fill="" d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z"></path></svg>
+                    let html = `<tr class="tableData" data-id="${check?e.muid:e.mlid}"><td>${++id}</td><td>${e.material_name}</td><td>${e.quantity}</td><td>&#8377;<span>${e.price}</span></td><td class="flex">
+                <span onclick="editParticulars(this)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pen" class="svg"><path fill="" d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z"></path></svg>
                 </span>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt" class="svg"><path fill="" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg>
+                <span onclick="deleteParticulars(this,${check?true:false})"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="trash-alt" class="svg"><path fill="" d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg>
                 </span></td></tr>`;
                     payment_listCtn.innerHTML += html;
                 })
@@ -184,4 +178,23 @@ function addInventoryItem(e) {
                 AlertNotify('Error!', "unable to retrive data", 'error');
             }
         })
+}
+
+function deleteParticulars(e,itemType) {
+   let itemCtn=e.parentElement.parentElement;
+   let id =itemCtn.dataset.id;
+   ReqHandler.DEL(itemType?ReqURI.removeParticulars.used+id:ReqURI.removeParticulars.left+id)
+        .then((res) => {
+            if (res.status) {
+                document.getElementById('loading-container').classList.add('hide')
+                AlertNotify('Sucess', res.msg, 'success');
+                itemCtn.remove();
+                document.getElementById('totalAmount').style.display='none'
+            } else {
+                document.getElementById('loading-container').classList.add('hide')
+                AlertNotify('Error!', "unable to retrive data", 'error');
+            }
+        })
+
+    
 }

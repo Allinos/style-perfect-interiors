@@ -68,10 +68,10 @@ exports.updateMatrialsToProject = async (req, res) => {
 
 
 exports.deleteMatrialsToProject = async (req, res) => {
-   const q = "delete from material_used where muid=? and ndeal_id=?"
-   await db.query(q, [req.query.muid, req.query.pid], (err, results) => {
+   const q = "delete from material_used where muid=?;"
+   await db.query(q, [req.query.muid], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: "Material deleted from project successfully!" })
+         res.status(200).send({status:true, msg: "Material deleted from project successfully!" })
       } else {
          console.log(err);
          res.status(500).send({ msg: "Internal error occurs!" });
@@ -122,10 +122,10 @@ exports.updateMatrialsToLeftStock = async (req, res) => {
 }
 
 exports.removeMatrialsFromLeftStock = async (req, res) => {
-   const q = "delete from material_left where mlid=? and ndeal_id=?"
-   await db.query(q, [req.query.mlid, req.query.pid], (err, results) => {
+   const q = "delete from material_left where mlid=? ";
+   await db.query(q, [req.query.mlid], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: "Material in leftStock deleted successfully!" })
+         res.status(200).send({status:true,msg: "Material in leftStock deleted successfully!" })
       } else {
          console.log(err);
          res.status(500).send({ msg: "Internal error occurs!" });

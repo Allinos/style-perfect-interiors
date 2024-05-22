@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="inventory-container" id="userInventoryCtn">
-                <% data[0]?.forEach((e)=>{ %>
+                <% data?.forEach((e)=>{ %>
                     <div class="inventory-item flex">
                         <div class="inventory-details">
                             <p class="inName uppercase">Ref No.</p>
@@ -99,51 +99,6 @@
                         </div>
                     </div>
                     <% }) %>
-            </div>
-
-            <div class="inventory-container" id="leftInventoryCtn">
-                <% data[1]?.forEach((e)=>{ %>
-                    <div class="inventory-item flex">
-                        <div class="inventory-details">
-                            <p class="inName uppercase">Ref No.</p>
-                            <p class="inData">
-                                <%= e.reference_no %>
-                            </p>
-                        </div>
-                        <div class="inventory-details">
-                            <p class="inName uppercase">Project name</p>
-                            <p class="inData">
-                                <%= e.work_name %>
-                            </p>
-                        </div>
-                        <div class="inventory-details">
-                            <p class="inName uppercase">Particulars</p>
-                            <p class="inData">
-                                <%= e.deal_name %>
-                            </p>
-                        </div>
-                        <div class="inventory-details">
-                            <p class="inName uppercase">Location</p>
-                            <p class="inData">
-                                <%= e.city %>
-                            </p>
-                        </div>
-                        <div class="inventory-details">
-                            <p class="inName uppercase">Deadline</p>
-                            <p class="inData">
-                                    <%= e.np_deadline?e.np_deadline:'N/A' %>
-                                </p>
-                        </div>
-                        <div class="inventory-details" onclick="showInventory(<%= e.id %>,'leftInventoryCtn',this)">
-                            <p class="arrow-side"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                    id="angle-double-right" class="svg">
-                                    <path fill="##000000"
-                                        d="M8.46,8.29A1,1,0,1,0,7,9.71L9.34,12,7,14.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3a1,1,0,0,0,0-1.42Zm8.5,3-3-3a1,1,0,0,0-1.42,1.42L14.84,12l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,17,11.29Z">
-                                    </path>
-                                </svg></p>
-                        </div>
-                    </div>
-                    <% })%>
             </div>
             <div class="data-info">
                 <%- include('../partials/pagin.ejs') %>

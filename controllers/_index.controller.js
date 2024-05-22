@@ -62,8 +62,7 @@ exports.expense = (req, res) => {
 //INVENTORY
 exports.inventory = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name,deals.np_deadline FROM material_used JOIN deals on deals.id =material_used.ndeal_id GROUP BY deals.id;
-        SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name ,deals.np_deadline FROM material_left JOIN deals on deals.id =material_left.ndeal_id GROUP BY deals.id ;`
+        const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name,deals.np_deadline FROM material_used JOIN deals on deals.id =material_used.ndeal_id GROUP BY deals.id;`
         db.query(query, (err, result, field) => {
             if (!err) {
                 // res.send(result)
@@ -76,9 +75,8 @@ exports.inventory = (req, res) => {
 }
 exports.stock = (req, res) => {
     if (req.session.isLoggedIn == true && req.session.role == 'admin') {
-        const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name,deals.np_deadline FROM material_used JOIN deals on deals.id =material_used.ndeal_id GROUP BY deals.id;
-        SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name ,deals.np_deadline FROM material_left JOIN deals on deals.id =material_left.ndeal_id GROUP BY deals.id ;`
-        db.query(query, (err, result, field) => {
+        const query = `SELECT deals.id,deals.reference_no,deals.city,deals.deal_name,deals.work_name ,deals.np_deadline FROM material_left JOIN deals on deals.id =material_left.ndeal_id GROUP BY deals.id ;`;
+           db.query(query, (err, result, field) => {
             if (!err) {
                 // res.send(result)
                 res.status(200).render('../views/admin/stock.ejs', {data: result})

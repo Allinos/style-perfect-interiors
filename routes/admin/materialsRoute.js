@@ -10,7 +10,7 @@ materialRouter.get('/get-all-ref', materialController.getAllRef);
 materialRouter.post('/add-material-to-project', materialController.addMatrialsToProject);
 materialRouter.get('/get-material-from-project', materialController.getMatrialsToProject);
 materialRouter.put('/update-material-from-project', materialController.updateMatrialsToProject);
-materialRouter.delete('/delete-material-from-project', materialController.deleteMatrialsToProject)
+materialRouter.delete('/remove-material-from-project', materialController.deleteMatrialsToProject)
 
 // left stock routes
 materialRouter.post('/add-material-to-leftstock', materialController.addMatrialsToLeftStock);
