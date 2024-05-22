@@ -218,7 +218,11 @@
     outline: 1px solid var(--sec-outline);
     background: var(--sec-light-color);
 }
-
+.installment .field button:last-child{
+    outline: 1px solid var(--ter-outline);
+    background: var(--ter-light-color);
+    color: var(--ter-dark-color);
+}
 /* ------------RESONSIVE KIHINI IYAT LIKHISU DEII-------------------- */
 @media only screen and (max-width : 768px) {
     .data-info :is(.finegrid) {
