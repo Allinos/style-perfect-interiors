@@ -128,11 +128,11 @@
 }
 
 .inventoryList,
-.inventoryList-popup {
+.inventoryList-popup, .editInventory {
     display: none;
 }
 
-:is(.inventoryList, .inventoryList-popup).active {
+:is(.inventoryList, .inventoryList-popup, .editInventory).active {
     display: block;
 }
 .inStock p{

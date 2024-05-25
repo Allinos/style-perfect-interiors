@@ -108,8 +108,7 @@ let ReqHandler = {
         });
         return response.json();
     }, PUT: async function (url, data) {
-
-        console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data),url);
         const response = await fetch(url, {
             method: "PUT",
             headers: { "Content-Type": "application/json; charset=UTF-8" },

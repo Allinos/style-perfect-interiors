@@ -55,10 +55,10 @@ exports.getMatrialsToProject = async (req, res) => {
 
 
 exports.updateMatrialsToProject = async (req, res) => {
-   const q = "update material_used set material_name=?, quantity=?, price=? where muid=? and ndeal_id=?"
-   await db.query(q, [req.body.item, req.body.qnt, req.body.amount, req.body.materialid, req.body.pid], (err, results) => {
+   const q = "update material_used set material_name=?, quantity=?, price=? where muid=? ;"
+   await db.query(q, [req.body.item, req.body.quantity, req.body.amount, req.query.muid], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: "Material updated successfully!" })
+         res.status(200).send({status:true, msg: "Material updated successfully!" })
       } else {
          console.log(err);
          res.status(500).send({ msg: "Internal error occurs!" });
@@ -78,9 +78,6 @@ exports.deleteMatrialsToProject = async (req, res) => {
       }
    })
 }
-
-
-// left in project
 
 
 exports.addMatrialsToLeftStock = async (req, res) => {
@@ -110,10 +107,10 @@ exports.getMatrialsFromLeftStock = async (req, res) => {
 }
 
 exports.updateMatrialsToLeftStock = async (req, res) => {
-   const q = "update material_left set material_name=?, quantity=?, price=? where mlid=? and ndeal_id=?"
-   await db.query(q, [req.body.item, req.body.qnt, req.body.amount, req.body.materialid, req.body.pid], (err, results) => {
+   const q = "update material_left set material_name=?, quantity=?, price=? where mlid=? ;"
+   await db.query(q, [req.body.item, req.body.quantity, req.body.amount, req.query.mlid], (err, results) => {
       if (!err) {
-         res.status(200).send({ msg: "Material in leftStock updated successfully!" })
+         res.status(200).send({ status:true,msg: "Material in leftStock updated successfully!" })
       } else {
          console.log(err);
          res.status(500).send({ msg: "Internal error occurs!" });

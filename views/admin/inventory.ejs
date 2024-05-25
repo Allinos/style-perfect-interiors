@@ -191,6 +191,34 @@
 
 
             </div>
+            
+            <!-- --EDIT INVENTORY--  -->
+            <div class="editInventory one" data-id="">
+                <div class="edit-inventory-popup two">
+                    <div class="field">
+                        <p class="uppercase">Ref No</p>
+                        <p class="uppercase ref"></p>
+                    </div>
+                    <div class="flex">
+                        <div class="field">
+                            <label for="particular" class="uppercase">Particulars</label>
+                            <input type="text" name="particular" id="particular">
+                        </div>
+                        <div class="field">
+                            <label for="quantity" class="uppercase">Quantity</label>
+                            <input type="text" name="quantity" id="quantity" >
+                        </div>
+                        <div class="field">
+                            <label for="amount" class="uppercase">Amount</label>
+                            <input type="text" name="amount" id="amount" >
+                        </div>
+                    </div>
+                    <div class="drop-btn flex">
+                        <button type="button" class="uppercase" onclick="UpdateParticular(this.parentElement)">update</button>
+                        <button type="reset" class="uppercase" onclick="Close_editParticulars()">Cancel</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- --INVENTORY LISTS-- -->
             <div class="inventoryList-popup one">
