@@ -72,6 +72,9 @@
     flex-wrap: wrap;
 }
 
+.inventory-details:not(:last-child){
+    flex: 1 0 0;
+}
 .inventory-details .inName {
     font-size: 12px;
     line-height: 2;
