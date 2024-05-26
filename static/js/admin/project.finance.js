@@ -64,7 +64,10 @@ async function openEdit(e, o) {
         </div>
         <div class="field">
         <label for="" class="uppercase">Mode of Payment</label>
-            <input type="text" name="mode" id="mode" value='${mode.innerText}'>
+        <select name="mode" id="mode">
+        <option value="cash">Cash</option>
+        <option value="online">Online</option>
+        </select>   
         </div>
     </div>
     <div class = "drop-btn flex">
