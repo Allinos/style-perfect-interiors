@@ -40,8 +40,8 @@ exports.updateAmountRecieved = async (req, res) => {
 
 
 exports.deleteAmountRecieved = async (req, res) => {
-  const deleteInfo =  [req.query.pid, req.query.fid]
-  const q = `DELETE FROM normal_projects_finance WHERE ndeal_id = ? AND fid = ?`
+  const deleteInfo =  [req.query.fid]
+  const q = `DELETE FROM normal_projects_finance WHERE fid = ?`
   await dbcon.query(q, deleteInfo, (err, result) => {
     if (err) {
       return res.status(500).send({msg:"some error occurred!.."});  

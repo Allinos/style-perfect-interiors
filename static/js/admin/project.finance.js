@@ -7,10 +7,8 @@ async function AddPaymentsTODeal(data, e) {
     const advanceData = new FormData(document.getElementById('advanced-form'));
     advanceData.append('ndeal_id', Number(target.dealid));
     await getFun.GET_POST('admin/finance/add-payments', 'POST', advanceData, 'form')
-    document.querySelector(`.main-dropdown`).style.display = `none`;;
+    document.querySelector(`.main-dropdown`).style.display = `none`;
 }
-
-
 
 async function openDick(data) {
     document.getElementsByClassName('main')[0].classList.add('flow')
@@ -38,11 +36,7 @@ async function openDick(data) {
         <div class = "drop-btn flex">
         <button type="button" class="uppercase" data-dealid=${dealid} onclick="AddPaymentsTODeal(this, event)">update</button>
         <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
-        </div>
-    </form>
-</div>`
-
-}
+        </div></form></div>`}
 
 
 async function openEdit(e, o) {
@@ -78,8 +72,8 @@ async function openEdit(e, o) {
         <button type = "reset" class = "uppercase" onclick="CloseModel('.main-dropdown')" >Cancel</button>
         </div>
 </div>`;
-
 }
+
 (function GetIncExp() {
     let Ctn = document.getElementsByClassName('total_user_data')
     ReqHandler.GET(location.origin + '/admin/finance/get-income-expense').then((res) => {
@@ -94,6 +88,7 @@ async function openEdit(e, o) {
 function CloseModel(e) {
     document.querySelector(e).style.display = 'none'
 }
+
 async function UpdatePayments(e, o) {
     let mainCtn = e.parentElement.parentElement;
     let amount = mainCtn.querySelector('#amount').value;
@@ -102,6 +97,16 @@ async function UpdatePayments(e, o) {
     let dataBody = { amount_got: amount, dateofpay: date, modeofpay: mode, fid: o }
     await getFun.GET_POST('admin/finance/update-payments', 'PUT', dataBody, 'form')
 }
+async function deletePayments(e, o) {
+    let mainCtn = e.parentElement.parentElement;
+    if (mainCtn.parentElement.children.length >1) {
+        let res = await getFun.DEL_UPD(`admin/finance/delete-payments?fid=${o}`, 'DELETE')
+        if(res.ok){ mainCtn.remove()}
+    }else{
+        getFun.GET_Notify('You Cann\'t Delete All Payments', 'Cann\'t Delete all payments . you can edit the last one', 'warning')
+    }
+}
+
 function search() {
     var inpValue = document.getElementById('searchQuery').value.toLowerCase();
     var elmCtn = document.querySelectorAll('.accordion-content');
