@@ -43,11 +43,11 @@ exports.getEmployListToaddOrRemove = async (req, res) => {
 exports.addEmployeeToProject = async (req, res) => {
   const { ndeal_id, category_id, emid, assignDate } = req.body
   if (req.body.emid && typeof req.body.emid === "string") {
-    const q = `INSERT INTO normal_project_employee (ndeal_id, category_id, emid, dateofassign) VALUES (?, ?, ?, ?, ?)`
+    const q = `INSERT INTO normal_project_employee (ndeal_id, category_id, emid, dateofassign) VALUES (?, ?, ?, ?)`
     await databaseCon.query(q, [ndeal_id, category_id, emid, assignDate], async (err1, data) => {
       if (!err1) {
         res.status(200).send({ msg: "employee added successfully" })
-      } else { res.status(500).send({ msg: "some internal error occured!" }) }
+      } else { res.status(500).send({ msg: "some internal error occured!" }) ; }
     })
     return;
   } else if (req.body.emid) {
