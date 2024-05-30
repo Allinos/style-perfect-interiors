@@ -47,7 +47,7 @@ exports.addEmployeeToProject = async (req, res) => {
     await databaseCon.query(q, [ndeal_id, category_id, emid, assignDate], async (err1, data) => {
       if (!err1) {
         res.status(200).send({ msg: "employee added successfully" })
-      } else { res.status(500).send({ msg: "some internal error occured!" }) ; }
+      } else { res.status(500).send({ msg: "some internal error occured!" })  }
     })
     return;
   } else if (req.body.emid) {
